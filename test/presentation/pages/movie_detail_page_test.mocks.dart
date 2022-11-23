@@ -8,7 +8,7 @@ import 'dart:ui' as _i12;
 import 'package:ditonton/common/state_enum.dart' as _i9;
 import 'package:ditonton/domain/entities/movie.dart' as _i10;
 import 'package:ditonton/domain/entities/movie_detail.dart' as _i7;
-import 'package:ditonton/domain/usecases/get_movie_detail.dart' as _i2;
+import 'package:ditonton/domain/usecases/movie_cases/get_movie_detail.dart' as _i2;
 import 'package:ditonton/domain/usecases/get_movie_recommendations.dart' as _i3;
 import 'package:ditonton/domain/usecases/get_watchlist_status.dart' as _i4;
 import 'package:ditonton/domain/usecases/remove_watchlist.dart' as _i6;

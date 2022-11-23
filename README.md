@@ -1,52 +1,95 @@
-# a199-flutter-expert-project
+[dicoding_class]: https://www.dicoding.com/academies/199
+[project_starter]: https://github.com/dicodingacademy/a199-flutter-expert-project
+[tmdb]: https://developers.themoviedb.org/3
 
-Repository ini merupakan starter project submission kelas Flutter Expert Dicoding Indonesia.
+# dicoding_flutter_expert
 
----
+This repo is a submission task from [dicoding.com Flutter Expert class][dicoding_class].
 
-## Tips Submission Awal
+Links:
 
-Pastikan untuk memeriksa kembali seluruh hasil testing pada submissionmu sebelum dikirimkan. Karena kriteria pada submission ini akan diperiksa setelah seluruh berkas testing berhasil dijalankan.
+- [Project Starter (ditonton App)][project_starter]
+- [TMDb (The API used by the project)][tmdb]
 
+# First Task
 
-## Tips Submission Akhir
+Add TV show feature on [ditonton App][project_starter]
 
-Jika kamu menerapkan modular pada project, Anda dapat memanfaatkan berkas `test.sh` pada repository ini. Berkas tersebut dapat mempermudah proses testing melalui *terminal* atau *command prompt*. Sebelumnya menjalankan berkas tersebut, ikuti beberapa langkah berikut:
-1. Install terlebih dahulu aplikasi sesuai dengan Operating System (OS) yang Anda gunakan.
-    - Bagi pengguna **Linux**, jalankan perintah berikut pada terminal.
+## Task Requirements
+
+### 1. TV Show List Page
+
+- Displaying a list of TV shows on the available page (Homepage) or creating a new page is allowed.
+- On-air, popular, and the top rated list included.
+- Each category list (On air, etc...) is separated.
+
+### 2. TV Show Detail Page
+
+- Get TV Show Detail by the selected item on the list.
+- Poster, title, rating, and overview included.
+- The detail page should show other TV show recommendations.
+
+### 3. Search TV Show
+
+- There is a feature to search for TV show titles.  
+  (API Query not Internal Query)s
+
+### 4. TV Show Watchlist
+
+- Users can save TV shows to a watchlist.
+- The app can display Watchlisted TV shows.
+
+### 5. Automated Testing Included
+
+- the TV show features must-have unit testing with a minimum testing coverage of 70%.
+
+- How to Testing Coverage:
+
+  - Install lcov:
+    - For **Linux** user, run the command below at terminal:
+      ```
+      sudo apt-get update -qq -y
+      sudo apt-get install lcov -y
+      ```
+    - For **Mac** user, run the command below at terminal:
+      ```
+      brew install lcov
+      ```
+    - For **Windows** user, follow the guide below:
+      - Install [Chocolatey](https://chocolatey.org/install).
+      - Then run the command below at terminal:
         ```
-        sudo apt-get update -qq -y
-        sudo apt-get install lcov -y
+        choco install lcov
         ```
-    
-    - Bagi pengguna **Mac**, jalankan perintah berikut pada terminal.
-        ```
-        brew install lcov
-        ```
-    - Bagi pengguna **Windows**, ikuti langkah berikut.
-        - Install [Chocolatey](https://chocolatey.org/install) pada komputermu.
-        - Setelah berhasil, install [lcov](https://community.chocolatey.org/packages/lcov) dengan menjalankan perintah berikut.
-            ```
-            choco install lcov
-            ```
-        - Kemudian cek **Environtment Variabel** pada kolom **System variabels** terdapat variabel GENTHTML dan LCOV_HOME. Jika tidak tersedia, Anda bisa menambahkan variabel baru dengan nilai seperti berikut.
-            | Variable | Value|
-            | ----------- | ----------- |
-            | GENTHTML | C:\ProgramData\chocolatey\lib\lcov\tools\bin\genhtml |
-            | LCOV_HOME | C:\ProgramData\chocolatey\lib\lcov\tools |
-        
-2. Untuk mempermudah proses verifikasi testing, jalankan perintah berikut.
-    ```
-    git init
-    ```
-3. Kemudian jalankan berkas `test.sh` dengan perintah berikut pada *terminal* atau *powershell*.
-    ```
-    test.sh
-    ```
-    atau
-    ```
-    ./test.sh
-    ```
-    Proses ini akan men-*generate* berkas `lcov.info` dan folder `coverage` terkait dengan laporan coverage.
-4. Tunggu proses testing selesai hingga muncul web terkait laporan coverage.
+      - Check GENTHTML and LCOV_HOME at **System variables > Environtment Variabel**. If it's not available, you can add a new variable with a value like the following:
+        | Variable | Value |
+        | - | - |
+        | GENTHTML | C:\ProgramData\chocolatey\lib\lcov\tools\bin\genhtml |
+        | LCOV_HOME | C:\ProgramData\chocolatey\lib\lcov\tools |
+  - Then run the `test.sh` file with the following command in the terminal or Powershell:
 
+    - Terminal
+      ```
+      test.sh
+      ```
+    - Powershell
+
+      ```
+      ./test.sh
+      ```
+
+    This process will generate the `lcov.info` file and `coverage folder` associated with the coverage report.
+
+### 6. Implementing a clean architecture
+
+The project must implement a clean architecture and divide the source code into 3 layers:
+
+- **Domain** : Contains the main requirements and logic related to business & application requirements.
+- **Data** : Contains code implementation to get data from external sources.
+- **Presentation** : Contains the implementation of widgets, application views, and state management.
+
+## Optional Task
+
+### 1. Seasons and Episode Info Included
+
+### 2. Integration and Widget Test Included

@@ -1,10 +1,11 @@
-import 'package:dartz/dartz.dart';
-import 'package:ditonton/domain/entities/movie.dart';
-import 'package:ditonton/domain/usecases/get_movie_recommendations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:dartz/dartz.dart';
 
+import 'package:ditonton/domain/entities/movie.dart';
+import 'package:ditonton/domain/usecases/movie_cases/get_movie_recommendations.dart';
 import '../../helpers/test_helper.mocks.dart';
+
 
 void main() {
   late GetMovieRecommendations usecase;

@@ -1,6 +1,7 @@
-import 'package:ditonton/domain/usecases/get_watchlist_status.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+
+import 'package:ditonton/domain/usecases/movie_cases/get_watchlist_status.dart';
 
 import '../../helpers/test_helper.mocks.dart';
 

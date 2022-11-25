@@ -14,10 +14,10 @@ class TvShow extends Equatable {
     required this.originalName,
   });
 
-  final String posterPath;
+  final String? posterPath;
   final double popularity;
   final int id;
-  final String backdropPath;
+  final String? backdropPath;
   final double voteAverage;
   final String overview;
   final List<int> genreIds;

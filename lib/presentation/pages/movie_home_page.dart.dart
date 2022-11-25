@@ -1,31 +1,34 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/domain/entities/movie.dart';
-import 'package:ditonton/presentation/pages/about_page.dart';
-import 'package:ditonton/presentation/pages/movie_detail_page.dart';
-import 'package:ditonton/presentation/pages/popular_movies_page.dart';
-import 'package:ditonton/presentation/pages/search_page.dart';
-import 'package:ditonton/presentation/pages/top_rated_movies_page.dart';
-import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
-import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
-import 'package:ditonton/common/state_enum.dart';
+import 'package:ditonton/presentation/pages/tv_show/tv_show_home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
-class HomeMoviePage extends StatefulWidget {
+import '../../common/constants.dart';
+import '../../common/state_enum.dart';
+import '../../domain/entities/movie.dart';
+import 'about_page.dart';
+import 'movie_detail_page.dart';
+import 'popular_movies_page.dart';
+import 'search_page.dart';
+import 'top_rated_movies_page.dart';
+import 'watchlist_movies_page.dart';
+import '../provider/movie_list_notifier.dart';
+
+class MovieHomePage extends StatefulWidget {
   @override
-  _HomeMoviePageState createState() => _HomeMoviePageState();
+  _MovieHomePageState createState() => _MovieHomePageState();
 }
 
-class _HomeMoviePageState extends State<HomeMoviePage> {
+class _MovieHomePageState extends State<MovieHomePage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(
-        () => Provider.of<MovieListNotifier>(context, listen: false)
-          ..fetchNowPlayingMovies()
-          ..fetchPopularMovies()
-          ..fetchTopRatedMovies());
+    Future.microtask(() {
+      return Provider.of<MovieListNotifier>(context, listen: false)
+        ..fetchNowPlayingMovies()
+        ..fetchPopularMovies()
+        ..fetchTopRatedMovies();
+    });
   }
 
   @override
@@ -46,6 +49,13 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               title: Text('Movies'),
               onTap: () {
                 Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.tv),
+              title: Text('TV Shows'),
+              onTap: () {
+                Navigator.pushNamed(context, TvShowHomePage.ROUTE_NAME);
               },
             ),
             ListTile(

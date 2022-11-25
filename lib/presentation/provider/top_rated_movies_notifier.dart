@@ -1,7 +1,8 @@
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/domain/entities/movie.dart';
-import 'package:ditonton/domain/usecases/get_top_rated_movies.dart';
 import 'package:flutter/foundation.dart';
+
+import '../../common/state_enum.dart';
+import '../../domain/entities/movie.dart';
+import '../../domain/usecases/movie_cases/get_top_rated_movies.dart';
 
 class TopRatedMoviesNotifier extends ChangeNotifier {
   final GetTopRatedMovies getTopRatedMovies;

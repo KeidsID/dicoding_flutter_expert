@@ -9,5 +9,7 @@ class GetTopRatedTvShows {
 
   final TvShowRepository repo;
 
-  Future<Either<Failure, List<TvShow>>> execute() => repo.getTopRatedTvShows();
+  Future<Either<Failure, List<TvShow>>> execute({int page = 1}) {
+    return repo.getTopRatedTvShows(page: page);
+  }
 }

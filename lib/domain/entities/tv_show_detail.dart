@@ -8,8 +8,8 @@ class TvShowDetail extends Equatable {
     required this.genres,
     required this.id,
     required this.name,
-    required this.numberOfEpisode,
-    required this.numberOfSeason,
+    required this.numberOfEpisodes,
+    required this.numberOfSeasons,
     required this.originalName,
     required this.overview,
     required this.popularity,
@@ -22,8 +22,8 @@ class TvShowDetail extends Equatable {
   final List<Genre> genres;
   final int id;
   final String name;
-  final int numberOfEpisode;
-  final int numberOfSeason;
+  final int numberOfEpisodes;
+  final int numberOfSeasons;
   final String originalName;
   final String overview;
   final double popularity;
@@ -38,8 +38,8 @@ class TvShowDetail extends Equatable {
       genres,
       id,
       name,
-      numberOfEpisode,
-      numberOfSeason,
+      numberOfEpisodes,
+      numberOfSeasons,
       originalName,
       overview,
       popularity,

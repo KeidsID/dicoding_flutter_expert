@@ -1,17 +1,18 @@
 import 'dart:convert';
 
-import 'package:ditonton/data/models/tv_show_models/tv_show_response.dart';
 import 'package:http/http.dart' as http;
 
 import '../../common/constants.dart';
 import '../../common/exception.dart';
 import '../models/tv_show_models/tv_show_model.dart';
+import '../models/tv_show_models/tv_show_response.dart';
+import '../models/tv_show_models/tv_show_detail_model.dart';
 
 abstract class TvShowRemoteDataSource {
-  Future<List<TvShowModel>> getOnAirTvShows();
-  Future<List<TvShowModel>> getPopularTvShows();
-  Future<List<TvShowModel>> getTopRatedTvShows();
-  // Future<TvShowDetailResponse> getTvShowDetail(int id);
+  Future<List<TvShowModel>> getAiringTodayTvShows();
+  Future<List<TvShowModel>> getPopularTvShows({int page = 1});
+  Future<List<TvShowModel>> getTopRatedTvShows({int page = 1});
+  Future<TvShowDetailModel> getTvShowDetail(int id);
   // Future<List<TvShowModel>> getTvShowRecommendations(int id);
   // Future<List<TvShowModel>> searchTvShows(String query);
 }
@@ -22,9 +23,9 @@ class TvShowRemoteDataSourceImpls implements TvShowRemoteDataSource {
   final http.Client client;
 
   @override
-  Future<List<TvShowModel>> getOnAirTvShows({int page = 1}) async {
+  Future<List<TvShowModel>> getAiringTodayTvShows() async {
     final response = await client.get(
-      Uri.parse('$BASE_URL/tv/on_the_air?$API_KEY&page=$page'),
+      Uri.parse('$BASE_URL/tv/airing_today?$API_KEY'),
     );
 
     if (response.statusCode == 200) {
@@ -55,6 +56,19 @@ class TvShowRemoteDataSourceImpls implements TvShowRemoteDataSource {
 
     if (response.statusCode == 200) {
       return TvShowResponse.fromJson(json.decode(response.body)).results;
+    } else {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<TvShowDetailModel> getTvShowDetail(int id) async {
+    final response = await client.get(
+      Uri.parse('$BASE_URL/tv/$id?$API_KEY'),
+    );
+
+    if (response.statusCode == 200) {
+      return TvShowDetailModel.fromJson(json.decode(response.body));
     } else {
       throw ServerException();
     }

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 
 import '../../../common/state_enum.dart';
 import '../../../domain/entities/tv_show.dart';
-import '../../../domain/usecases/tv_show_cases/get_on_air_tv_shows.dart';
+import '../../../domain/usecases/tv_show_cases/get_airing_today_tv_shows.dart';
 import '../../../domain/usecases/tv_show_cases/get_popular_tv_shows.dart';
 import '../../../domain/usecases/tv_show_cases/get_top_rated_tv_shows.dart';
 
@@ -13,7 +13,7 @@ class TvShowListNotifier extends ChangeNotifier {
     required this.getTopRatedTvShows,
   });
 
-  final GetOnAirTvShows getOnAirTvShows;
+  final GetAiringTodayTvShows getOnAirTvShows;
   final GetPopularTvShows getPopularTvShows;
   final GetTopRatedTvShows getTopRatedTvShows;
 

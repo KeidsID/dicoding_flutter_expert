@@ -6,6 +6,8 @@ import 'package:ditonton/presentation/pages/movie_home_page.dart.dart';
 import 'package:ditonton/presentation/pages/popular_movies_page.dart';
 import 'package:ditonton/presentation/pages/search_page.dart';
 import 'package:ditonton/presentation/pages/top_rated_movies_page.dart';
+import 'package:ditonton/presentation/pages/tv_show/popular_tv_shows_page.dart';
+import 'package:ditonton/presentation/pages/tv_show/top_rated_tv_shows_page.dart';
 import 'package:ditonton/presentation/pages/tv_show/tv_show_home_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
 import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
@@ -20,6 +22,8 @@ import 'package:provider/provider.dart';
 import 'package:ditonton/injection.dart' as di;
 import 'package:provider/single_child_widget.dart';
 
+import 'presentation/provider/tv_show/popular_tv_shows_notifier.dart';
+import 'presentation/provider/tv_show/top_rated_tv_shows_notifier.dart';
 import 'presentation/provider/tv_show/tv_show_list_notifier.dart.dart';
 
 void main() {
@@ -30,30 +34,42 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var movieProvs = <SingleChildWidget>[
+      ChangeNotifierProvider(
+        create: (_) => di.locator<MovieListNotifier>(),
+      ),
+      ChangeNotifierProvider(
+        create: (_) => di.locator<MovieDetailNotifier>(),
+      ),
+      ChangeNotifierProvider(
+        create: (_) => di.locator<MovieSearchNotifier>(),
+      ),
+      ChangeNotifierProvider(
+        create: (_) => di.locator<TopRatedMoviesNotifier>(),
+      ),
+      ChangeNotifierProvider(
+        create: (_) => di.locator<PopularMoviesNotifier>(),
+      ),
+      ChangeNotifierProvider(
+        create: (_) => di.locator<WatchlistMovieNotifier>(),
+      ),
+    ];
+    var tvShowProvs = <SingleChildWidget>[
+      ChangeNotifierProvider(
+        create: (_) => di.locator<TvShowListNotifier>(),
+      ),
+      ChangeNotifierProvider(
+        create: (_) => di.locator<PopularTvShowsNotifier>(),
+      ),
+      ChangeNotifierProvider(
+        create: (_) => di.locator<TopRatedTvShowsNotifier>(),
+      ),
+    ];
+
+    movieProvs.addAll(tvShowProvs);
+
     return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (_) => di.locator<MovieListNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TvShowListNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<MovieDetailNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<MovieSearchNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TopRatedMoviesNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<PopularMoviesNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<WatchlistMovieNotifier>(),
-        ),
-      ],
+      providers: movieProvs,
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData.dark().copyWith(
@@ -74,6 +90,10 @@ class MyApp extends StatelessWidget {
               return CupertinoPageRoute(builder: (_) => PopularMoviesPage());
             case TopRatedMoviesPage.ROUTE_NAME:
               return CupertinoPageRoute(builder: (_) => TopRatedMoviesPage());
+            case PopularTvShowsPage.ROUTE_NAME:
+              return CupertinoPageRoute(builder: (_) => PopularTvShowsPage());
+            case TopRatedTvShowsPage.ROUTE_NAME:
+              return CupertinoPageRoute(builder: (_) => TopRatedTvShowsPage());
             case MovieDetailPage.ROUTE_NAME:
               final id = settings.arguments as int;
               return MaterialPageRoute(

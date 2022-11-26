@@ -1,14 +1,16 @@
-import 'package:ditonton/domain/entities/tv_show.dart';
+import 'package:ditonton/presentation/pages/tv_show/popular_tv_shows_page.dart';
+import 'package:ditonton/presentation/pages/tv_show/top_rated_tv_shows_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 import '../../../common/constants.dart';
 import '../../../common/state_enum.dart';
-import '../../provider/tv_show/tv_show_list_notifier.dart.dart';
+import '../../../domain/entities/tv_show.dart';
 import '../about_page.dart';
 import '../search_page.dart';
 import '../watchlist_movies_page.dart';
+import '../../provider/tv_show/tv_show_list_notifier.dart.dart';
 
 class TvShowHomePage extends StatefulWidget {
   static const ROUTE_NAME = '/tv_show_home';
@@ -108,7 +110,9 @@ class _TvShowHomePageState extends State<TvShowHomePage> {
               }),
               _buildSubHeading(
                 title: 'Popular',
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, PopularTvShowsPage.ROUTE_NAME);
+                },
               ),
               Consumer<TvShowListNotifier>(builder: (context, data, child) {
                 final state = data.popularState;
@@ -124,7 +128,9 @@ class _TvShowHomePageState extends State<TvShowHomePage> {
               }),
               _buildSubHeading(
                 title: 'Top Rated',
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, TopRatedTvShowsPage.ROUTE_NAME);
+                },
               ),
               Consumer<TvShowListNotifier>(builder: (context, data, child) {
                 final state = data.topRatedState;

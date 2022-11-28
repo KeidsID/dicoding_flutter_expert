@@ -55,6 +55,7 @@ class _MovieHomePageState extends State<MovieHomePage> {
               leading: Icon(Icons.tv),
               title: Text('TV Shows'),
               onTap: () {
+                Navigator.pop(context);
                 Navigator.pushNamed(context, TvShowHomePage.ROUTE_NAME);
               },
             ),

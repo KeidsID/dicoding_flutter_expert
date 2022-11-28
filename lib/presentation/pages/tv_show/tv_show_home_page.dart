@@ -1,5 +1,7 @@
 import 'package:ditonton/presentation/pages/tv_show/popular_tv_shows_page.dart';
 import 'package:ditonton/presentation/pages/tv_show/top_rated_tv_shows_page.dart';
+import 'package:ditonton/presentation/pages/tv_show/tv_show_detail_page.dart';
+import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -48,7 +50,12 @@ class _TvShowHomePageState extends State<TvShowHomePage> {
               leading: Icon(Icons.movie),
               title: Text('Movies'),
               onTap: () {
-                Navigator.pushNamed(context, '/home');
+                Navigator.pop(context);
+
+                // popUntil() did'nt work, so I did this
+                Future.delayed(Duration(milliseconds: 250), () {
+                  Navigator.pop(context);
+                });
               },
             ),
             ListTile(
@@ -93,17 +100,17 @@ class _TvShowHomePageState extends State<TvShowHomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'On Air',
+                'Airing Today',
                 style: kHeading6,
               ),
               Consumer<TvShowListNotifier>(builder: (context, data, child) {
-                final state = data.onAirState;
+                final state = data.airingTodayState;
                 if (state == RequestState.Loading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
                 } else if (state == RequestState.Loaded) {
-                  return TvShowList(data.onAirTvShows);
+                  return TvShowList(data.airingTodayTvShows);
                 } else {
                   return Text('Failed');
                 }
@@ -189,7 +196,13 @@ class TvShowList extends StatelessWidget {
           return Container(
             padding: const EdgeInsets.all(8),
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(
+                  context,
+                  TvShowDetailPage.ROUTE_NAME,
+                  arguments: tvShow.id,
+                );
+              },
               child: ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(16)),
                 child: CachedNetworkImage(

@@ -129,6 +129,8 @@ class _PopularTvShowsPageState extends State<PopularTvShowsPage> {
                   _currentPage = (int.parse(_currentPage) + 1).toString();
                 });
 
+                _pageInput.text = _currentPage.toString();
+
                 Provider.of<PopularTvShowsNotifier>(
                   context,
                   listen: false,
@@ -142,6 +144,8 @@ class _PopularTvShowsPageState extends State<PopularTvShowsPage> {
                 setState(() {
                   _currentPage = (int.parse(_currentPage) - 1).toString();
                 });
+
+                _pageInput.text = _currentPage.toString();
 
                 Provider.of<PopularTvShowsNotifier>(
                   context,

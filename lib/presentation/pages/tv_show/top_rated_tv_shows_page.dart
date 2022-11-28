@@ -32,7 +32,7 @@ class _TopRatedTvShowsPageState extends State<TopRatedTvShowsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Popular Tv Shows'),
+        title: Text('Top Rated Tv Shows'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -129,6 +129,8 @@ class _TopRatedTvShowsPageState extends State<TopRatedTvShowsPage> {
                   _currentPage = (int.parse(_currentPage) + 1).toString();
                 });
 
+                _pageInput.text = _currentPage.toString();
+
                 Provider.of<TopRatedTvShowsNotifier>(
                   context,
                   listen: false,
@@ -142,6 +144,8 @@ class _TopRatedTvShowsPageState extends State<TopRatedTvShowsPage> {
                 setState(() {
                   _currentPage = (int.parse(_currentPage) - 1).toString();
                 });
+
+                _pageInput.text = _currentPage.toString();
 
                 Provider.of<TopRatedTvShowsNotifier>(
                   context,

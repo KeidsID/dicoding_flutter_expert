@@ -8,6 +8,7 @@ import 'package:ditonton/presentation/pages/search_page.dart';
 import 'package:ditonton/presentation/pages/top_rated_movies_page.dart';
 import 'package:ditonton/presentation/pages/tv_show/popular_tv_shows_page.dart';
 import 'package:ditonton/presentation/pages/tv_show/top_rated_tv_shows_page.dart';
+import 'package:ditonton/presentation/pages/tv_show/tv_show_detail_page.dart';
 import 'package:ditonton/presentation/pages/tv_show/tv_show_home_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
 import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
@@ -24,6 +25,7 @@ import 'package:provider/single_child_widget.dart';
 
 import 'presentation/provider/tv_show/popular_tv_shows_notifier.dart';
 import 'presentation/provider/tv_show/top_rated_tv_shows_notifier.dart';
+import 'presentation/provider/tv_show/tv_show_detail_notifier.dart';
 import 'presentation/provider/tv_show/tv_show_list_notifier.dart.dart';
 
 void main() {
@@ -64,6 +66,9 @@ class MyApp extends StatelessWidget {
       ChangeNotifierProvider(
         create: (_) => di.locator<TopRatedTvShowsNotifier>(),
       ),
+      ChangeNotifierProvider(
+        create: (_) => di.locator<TvShowDetailNotifier>(),
+      ),
     ];
 
     movieProvs.addAll(tvShowProvs);
@@ -98,6 +103,12 @@ class MyApp extends StatelessWidget {
               final id = settings.arguments as int;
               return MaterialPageRoute(
                 builder: (_) => MovieDetailPage(id: id),
+                settings: settings,
+              );
+            case TvShowDetailPage.ROUTE_NAME:
+              final id = settings.arguments as int;
+              return MaterialPageRoute(
+                builder: (_) => TvShowDetailPage(id: id),
                 settings: settings,
               );
             case SearchPage.ROUTE_NAME:

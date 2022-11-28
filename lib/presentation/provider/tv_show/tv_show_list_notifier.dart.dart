@@ -17,40 +17,40 @@ class TvShowListNotifier extends ChangeNotifier {
   final GetPopularTvShows getPopularTvShows;
   final GetTopRatedTvShows getTopRatedTvShows;
 
-  var _onAirTvShows = <TvShow>[];
+  var _airingTodayTvShows = <TvShow>[];
   var _popularTvShows = <TvShow>[];
   var _topRatedTvShows = <TvShow>[];
 
-  var _onAirState = RequestState.Empty;
+  var _airingTodayState = RequestState.Empty;
   var _popularState = RequestState.Empty;
   var _topRatedState = RequestState.Empty;
 
   var _message = '';
 
-  List<TvShow> get onAirTvShows => _onAirTvShows;
+  List<TvShow> get airingTodayTvShows => _airingTodayTvShows;
   List<TvShow> get popularTvShows => _popularTvShows;
   List<TvShow> get topRatedTvShows => _topRatedTvShows;
 
-  RequestState get onAirState => _onAirState;
+  RequestState get airingTodayState => _airingTodayState;
   RequestState get popularState => _popularState;
   RequestState get topRatedState => _topRatedState;
 
   String get message => _message;
 
   Future<void> fetchOnAirTvShows() async {
-    _onAirState = RequestState.Loading;
+    _airingTodayState = RequestState.Loading;
     notifyListeners();
 
     final result = await getOnAirTvShows.execute();
     result.fold(
       (failure) {
-        _onAirState = RequestState.Error;
+        _airingTodayState = RequestState.Error;
         _message = failure.message;
         notifyListeners();
       },
       (movies) {
-        _onAirState = RequestState.Loaded;
-        _onAirTvShows = movies;
+        _airingTodayState = RequestState.Loaded;
+        _airingTodayTvShows = movies;
         notifyListeners();
       },
     );

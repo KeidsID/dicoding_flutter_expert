@@ -11,9 +11,26 @@ Links:
 - [Project Starter (ditonton App)][project_starter]
 - [TMDb (The API used by the project)][tmdb]
 
+# TODO
+
+Mandatory Tasks:
+
+- [x] TV Show List Page.
+- [x] TV Show Detail Page with Recommendations.
+- [ ] Search TV Show Feature.
+- [ ] TV Show Watchlist/Bookmark Feature.
+- [ ] Unit testing with minimum testing coverage of 70%.
+- [x] Implementing a clean architecture.
+
+Optional Tasks:
+
+- [ ] TV Show Episodes & Seasons Detail.
+- [ ] Widget test.
+- [ ] Integration test.
+
 # First Task
 
-Add TV show feature on [ditonton App][project_starter]
+Add TV show feature on [ditonton App][project_starter].
 
 ## Task Requirements
 
@@ -31,8 +48,8 @@ Add TV show feature on [ditonton App][project_starter]
 
 ### 3. Search TV Show
 
-- There is a feature to search for TV show titles.  
-  (API Query not Internal Query)s
+- There is a feature to search for TV show titles  
+  (API Query not Internal Query).
 
 ### 4. TV Show Watchlist
 
@@ -43,7 +60,7 @@ Add TV show feature on [ditonton App][project_starter]
 
 - the TV show features must-have unit testing with a minimum testing coverage of 70%.
 
-- How to Testing Coverage:
+- How to check testing coverage:
 
   - Install lcov:
     - For **Linux** user, run the command below at terminal:
@@ -90,6 +107,6 @@ The project must implement a clean architecture and divide the source code into 
 
 ## Optional Task
 
-### 1. Seasons and Episode Info Included
+### 1. Seasons and Episodes Detaiil Info Included.
 
-### 2. Integration and Widget Test Included
+### 2. Integration and Widget Test Included.

@@ -17,8 +17,8 @@ abstract class TvShowRemoteDataSource {
   // Future<List<TvShowModel>> searchTvShows(String query);
 }
 
-class TvShowRemoteDataSourceImpls implements TvShowRemoteDataSource {
-  TvShowRemoteDataSourceImpls({required this.client});
+class TvShowRemoteDataSourceImpl implements TvShowRemoteDataSource {
+  TvShowRemoteDataSourceImpl({required this.client});
 
   final http.Client client;
 

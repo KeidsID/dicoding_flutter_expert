@@ -1,8 +1,9 @@
 import 'package:ditonton/domain/entities/tv_show_detail.dart';
+import 'package:equatable/equatable.dart';
 
 import '../genre_model.dart';
 
-class TvShowDetailModel {
+class TvShowDetailModel extends Equatable {
   TvShowDetailModel({
     required this.backdropPath,
     required this.genres,
@@ -68,5 +69,24 @@ class TvShowDetailModel {
       voteAverage: voteAverage,
       voteCount: voteCount,
     );
+  }
+
+  @override
+  List<Object?> get props {
+    return [
+      backdropPath,
+      genres,
+      homepage,
+      id,
+      name,
+      numberOfEpisodes,
+      numberOfSeasons,
+      originalName,
+      overview,
+      popularity,
+      posterPath,
+      voteAverage,
+      voteCount,
+    ];
   }
 }

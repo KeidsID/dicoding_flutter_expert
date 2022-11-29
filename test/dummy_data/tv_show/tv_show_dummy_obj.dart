@@ -1,3 +1,5 @@
+import 'package:ditonton/data/models/genre_model.dart';
+import 'package:ditonton/data/models/tv_show_models/tv_show_detail_model.dart';
 import 'package:ditonton/data/models/tv_show_models/tv_show_model.dart';
 import 'package:ditonton/data/models/tv_show_models/tv_show_response.dart';
 import 'package:ditonton/domain/entities/genre.dart';
@@ -17,7 +19,6 @@ final testTvShow = TvShow(
   name: 'Pretty Little Liars',
   originalName: 'Pretty Little Liars',
 );
-
 final testTvShowModel = TvShowModel(
   posterPath: '/vC324sdfcS313vh9QXwijLIHPJp.jpg',
   popularity: 47.432451,
@@ -31,14 +32,12 @@ final testTvShowModel = TvShowModel(
   name: 'Pretty Little Liars',
   originalName: 'Pretty Little Liars',
 );
-
 final testTvShowResponse = TvShowResponse(
   page: 1,
   results: [testTvShowModel],
   totalResults: 1,
   totalPages: 1,
 );
-
 final testTvShowDetail = TvShowDetail(
   backdropPath: '/suopoADq0k8YZr4dQXcU6pToj6s.jpg',
   genres: <Genre>[
@@ -47,6 +46,27 @@ final testTvShowDetail = TvShowDetail(
     Genre(id: 10759, name: 'Action & Adventure'),
     Genre(id: 9648, name: 'Mystery'),
   ],
+  id: 1399,
+  name: 'Game of Thrones',
+  numberOfEpisodes: 73,
+  numberOfSeasons: 8,
+  originalName: 'Game of Thrones',
+  overview:
+      "Seven noble families fight for control of the mythical land of Westeros. Friction between the houses leads to full-scale war. All while a very ancient evil awakens in the farthest north. Amidst the war, a neglected military order of misfits, the Night's Watch, is all that stands between the realms of men and icy horrors beyond.",
+  popularity: 369.594,
+  posterPath: '/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg',
+  voteAverage: 8.3,
+  voteCount: 11504,
+);
+final testTvShowDetailModel = TvShowDetailModel(
+  backdropPath: '/suopoADq0k8YZr4dQXcU6pToj6s.jpg',
+  genres: <GenreModel>[
+    GenreModel(id: 10765, name: 'Sci-Fi & Fantasy'),
+    GenreModel(id: 18, name: 'Drama'),
+    GenreModel(id: 10759, name: 'Action & Adventure'),
+    GenreModel(id: 9648, name: 'Mystery'),
+  ],
+  homepage: 'http://www.hbo.com/game-of-thrones',
   id: 1399,
   name: 'Game of Thrones',
   numberOfEpisodes: 73,

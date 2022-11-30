@@ -197,5 +197,41 @@ void main() {
         expect(() => actual, throwsA(isA<ServerException>()));
       });
     });
+    group('.searchTvShows() test:', () {
+      const query = 'lmao';
+      test('Return List<TvShowModel> when the response code is 200', () async {
+        // arrange
+        when(mockClient.get(
+          Uri.parse('$BASE_URL/search/tv?$API_KEY&query=$query'),
+        )).thenAnswer(
+          (_) async => http.Response(
+            tvShowListJsonStr,
+            200,
+            headers: {
+              HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
+            },
+          ),
+        );
+
+        // act
+        final actual = await dataSource.searchTvShows(query);
+
+        // assert
+        expect(actual, equals(testTvShowResponse.results));
+      });
+      test('Throw a ServerException when the response code is NOT 200',
+          () async {
+        // arrange
+        when(mockClient.get(
+          Uri.parse('$BASE_URL/search/tv?$API_KEY&query=$query'),
+        )).thenAnswer((_) async => http.Response('Not Found', 404));
+
+        // act
+        final actual = dataSource.searchTvShows(query);
+
+        // assert
+        expect(() => actual, throwsA(isA<ServerException>()));
+      });
+    });
   });
 }

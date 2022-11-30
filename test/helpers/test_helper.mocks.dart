@@ -216,6 +216,15 @@ class MockTvShowRepository extends _i1.Mock implements _i11.TvShowRepository {
                       _FakeEither_0<_i8.Failure, List<_i12.TvShow>>(this,
                           Invocation.method(#getTvShowRecommendations, [id]))))
           as _i7.Future<_i2.Either<_i8.Failure, List<_i12.TvShow>>>);
+  @override
+  _i7.Future<_i2.Either<_i8.Failure, List<_i12.TvShow>>> searchTvShows(
+          String? query) =>
+      (super.noSuchMethod(Invocation.method(#searchTvShows, [query]),
+              returnValue:
+                  _i7.Future<_i2.Either<_i8.Failure, List<_i12.TvShow>>>.value(
+                      _FakeEither_0<_i8.Failure, List<_i12.TvShow>>(
+                          this, Invocation.method(#searchTvShows, [query]))))
+          as _i7.Future<_i2.Either<_i8.Failure, List<_i12.TvShow>>>);
 }
 
 /// A class which mocks [MovieRemoteDataSource].
@@ -303,6 +312,11 @@ class MockTvShowRemoteDataSource extends _i1.Mock
   @override
   _i7.Future<List<_i17.TvShowModel>> getTvShowRecommendations(int? id) =>
       (super.noSuchMethod(Invocation.method(#getTvShowRecommendations, [id]),
+          returnValue: _i7.Future<List<_i17.TvShowModel>>.value(
+              <_i17.TvShowModel>[])) as _i7.Future<List<_i17.TvShowModel>>);
+  @override
+  _i7.Future<List<_i17.TvShowModel>> searchTvShows(String? query) =>
+      (super.noSuchMethod(Invocation.method(#searchTvShows, [query]),
           returnValue: _i7.Future<List<_i17.TvShowModel>>.value(
               <_i17.TvShowModel>[])) as _i7.Future<List<_i17.TvShowModel>>);
 }

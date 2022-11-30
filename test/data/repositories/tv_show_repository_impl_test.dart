@@ -307,5 +307,58 @@ void main() {
         },
       );
     });
+    group('.searchTvShows() test:', () {
+      const query = 'lmao';
+      test(
+        'Return List<TvShow> when remote data source call is successful',
+        () async {
+          // arrange
+          when(mockRDataSource.searchTvShows(query))
+              .thenAnswer((_) async => tvShowModels);
+
+          // act
+          final result = await repo.searchTvShows(query);
+
+          // assert
+          verify(mockRDataSource.searchTvShows(query));
+
+          // https://github.com/spebbe/dartz/issues/80
+          final resultList = result | [];
+          expect(resultList, tvShows);
+        },
+      );
+      test(
+        'Return ServerFailure() when remote data source call is fail',
+        () async {
+          // arrange
+          when(mockRDataSource.searchTvShows(query))
+              .thenThrow(ServerException());
+
+          // act
+          final result = await repo.searchTvShows(query);
+
+          // assert
+          verify(mockRDataSource.searchTvShows(query));
+          expect(result, equals(Left(ServerFailure(''))));
+        },
+      );
+      test(
+        'Return ConnectionFailure() when device is not connected to internet',
+        () async {
+          // arrange
+          const failMsg = 'Failed to connect to the network';
+
+          when(mockRDataSource.searchTvShows(query))
+              .thenThrow(SocketException(failMsg));
+
+          // act
+          final result = await repo.searchTvShows(query);
+
+          // assert
+          verify(mockRDataSource.searchTvShows(query));
+          expect(result, equals(Left(ConnectionFailure(failMsg))));
+        },
+      );
+    });
   });
 }

@@ -36,14 +36,14 @@ class TvShowCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      tvShow.name ?? '-',
+                      tvShow.name,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: kHeading6,
                     ),
                     SizedBox(height: 16),
                     Text(
-                      tvShow.overview ?? '-',
+                      tvShow.overview,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),

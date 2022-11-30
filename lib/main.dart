@@ -7,6 +7,7 @@ import 'package:ditonton/presentation/pages/popular_movies_page.dart';
 import 'package:ditonton/presentation/pages/search_page.dart';
 import 'package:ditonton/presentation/pages/top_rated_movies_page.dart';
 import 'package:ditonton/presentation/pages/tv_show/popular_tv_shows_page.dart';
+import 'package:ditonton/presentation/pages/tv_show/search_tv_show_page.dart';
 import 'package:ditonton/presentation/pages/tv_show/top_rated_tv_shows_page.dart';
 import 'package:ditonton/presentation/pages/tv_show/tv_show_detail_page.dart';
 import 'package:ditonton/presentation/pages/tv_show/tv_show_home_page.dart';
@@ -27,6 +28,7 @@ import 'presentation/provider/tv_show/popular_tv_shows_notifier.dart';
 import 'presentation/provider/tv_show/top_rated_tv_shows_notifier.dart';
 import 'presentation/provider/tv_show/tv_show_detail_notifier.dart';
 import 'presentation/provider/tv_show/tv_show_list_notifier.dart.dart';
+import 'presentation/provider/tv_show/tv_show_search_notifier.dart';
 
 void main() {
   di.init();
@@ -68,6 +70,9 @@ class MyApp extends StatelessWidget {
       ),
       ChangeNotifierProvider(
         create: (_) => di.locator<TvShowDetailNotifier>(),
+      ),
+      ChangeNotifierProvider(
+        create: (_) => di.locator<TvShowSearchNotifier>(),
       ),
     ];
 
@@ -113,6 +118,8 @@ class MyApp extends StatelessWidget {
               );
             case SearchPage.ROUTE_NAME:
               return CupertinoPageRoute(builder: (_) => SearchPage());
+            case SearchTvShowPage.ROUTE_NAME:
+              return CupertinoPageRoute(builder: (_) => SearchTvShowPage());
             case WatchlistMoviesPage.ROUTE_NAME:
               return MaterialPageRoute(builder: (_) => WatchlistMoviesPage());
             case AboutPage.ROUTE_NAME:

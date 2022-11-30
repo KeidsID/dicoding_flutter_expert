@@ -29,6 +29,12 @@ class _TopRatedTvShowsPageState extends State<TopRatedTvShowsPage> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _pageInput.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -125,22 +131,10 @@ class _TopRatedTvShowsPageState extends State<TopRatedTvShowsPage> {
             SizedBox(width: 8),
             ElevatedButton(
               onPressed: () {
-                setState(() {
-                  _currentPage = (int.parse(_currentPage) + 1).toString();
-                });
+                if (int.parse(_currentPage) - 1 <= 0) {
+                  return;
+                }
 
-                _pageInput.text = _currentPage.toString();
-
-                Provider.of<TopRatedTvShowsNotifier>(
-                  context,
-                  listen: false,
-                ).fetchTvShows(page: int.parse(_currentPage));
-              },
-              child: Icon(Icons.add),
-            ),
-            SizedBox(width: 8),
-            ElevatedButton(
-              onPressed: () {
                 setState(() {
                   _currentPage = (int.parse(_currentPage) - 1).toString();
                 });
@@ -153,6 +147,22 @@ class _TopRatedTvShowsPageState extends State<TopRatedTvShowsPage> {
                 ).fetchTvShows(page: int.parse(_currentPage));
               },
               child: Icon(Icons.remove),
+            ),
+            SizedBox(width: 8),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  _currentPage = (int.parse(_currentPage) + 1).toString();
+                });
+
+                _pageInput.text = _currentPage.toString();
+
+                Provider.of<TopRatedTvShowsNotifier>(
+                  context,
+                  listen: false,
+                ).fetchTvShows(page: int.parse(_currentPage));
+              },
+              child: Icon(Icons.add),
             ),
           ],
         ),

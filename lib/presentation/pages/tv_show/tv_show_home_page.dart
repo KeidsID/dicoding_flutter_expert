@@ -1,7 +1,7 @@
 import 'package:ditonton/presentation/pages/tv_show/popular_tv_shows_page.dart';
+import 'package:ditonton/presentation/pages/tv_show/search_tv_show_page.dart';
 import 'package:ditonton/presentation/pages/tv_show/top_rated_tv_shows_page.dart';
 import 'package:ditonton/presentation/pages/tv_show/tv_show_detail_page.dart';
-import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -50,17 +50,16 @@ class _TvShowHomePageState extends State<TvShowHomePage> {
               leading: Icon(Icons.movie),
               title: Text('Movies'),
               onTap: () {
-                Navigator.pop(context);
-
                 // popUntil() did'nt work, so I did this
-                Future.delayed(Duration(milliseconds: 250), () {
-                  Navigator.pop(context);
-                });
+                Navigator.pop(context);
+                Navigator.pop(context);
               },
             ),
             ListTile(
               leading: Icon(Icons.tv),
               title: Text('TV Shows'),
+              iconColor: kMikadoYellow,
+              textColor: kMikadoYellow,
               onTap: () {
                 Navigator.pop(context);
               },
@@ -87,7 +86,7 @@ class _TvShowHomePageState extends State<TvShowHomePage> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, SearchPage.ROUTE_NAME);
+              Navigator.pushNamed(context, SearchTvShowPage.ROUTE_NAME);
             },
             icon: Icon(Icons.search),
           )

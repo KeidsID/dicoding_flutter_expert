@@ -47,6 +47,8 @@ class _MovieHomePageState extends State<MovieHomePage> {
             ListTile(
               leading: Icon(Icons.movie),
               title: Text('Movies'),
+              iconColor: kMikadoYellow,
+              textColor: kMikadoYellow,
               onTap: () {
                 Navigator.pop(context);
               },

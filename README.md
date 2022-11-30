@@ -17,7 +17,7 @@ Mandatory Tasks:
 
 - [x] TV Show List Page.
 - [x] TV Show Detail Page with Recommendations.
-- [ ] Search TV Show Feature.
+- [x] Search TV Show Feature.
 - [ ] TV Show Watchlist/Bookmark Feature.
 - [ ] Unit testing with minimum testing coverage of 70%.
 - [x] Implementing a clean architecture.

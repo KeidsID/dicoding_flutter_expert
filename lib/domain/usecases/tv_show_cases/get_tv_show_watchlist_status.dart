@@ -1,7 +1,7 @@
 import '../../repositories/tv_show_repository.dart';
 
-class GetTvShowStatus {
-  GetTvShowStatus(this.repo);
+class GetTvShowWatchlistStatus {
+  GetTvShowWatchlistStatus(this.repo);
 
   final TvShowRepository repo;
 

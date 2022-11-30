@@ -2,6 +2,7 @@ import 'package:ditonton/presentation/pages/tv_show/popular_tv_shows_page.dart';
 import 'package:ditonton/presentation/pages/tv_show/search_tv_show_page.dart';
 import 'package:ditonton/presentation/pages/tv_show/top_rated_tv_shows_page.dart';
 import 'package:ditonton/presentation/pages/tv_show/tv_show_detail_page.dart';
+import 'package:ditonton/presentation/pages/tv_show/watchlist_tv_shows_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -10,8 +11,6 @@ import '../../../common/constants.dart';
 import '../../../common/state_enum.dart';
 import '../../../domain/entities/tv_show.dart';
 import '../about_page.dart';
-import '../search_page.dart';
-import '../watchlist_movies_page.dart';
 import '../../provider/tv_show/tv_show_list_notifier.dart.dart';
 
 class TvShowHomePage extends StatefulWidget {
@@ -68,7 +67,7 @@ class _TvShowHomePageState extends State<TvShowHomePage> {
               leading: Icon(Icons.save_alt),
               title: Text('Watchlist'),
               onTap: () {
-                Navigator.pushNamed(context, WatchlistMoviesPage.ROUTE_NAME);
+                Navigator.pushNamed(context, WatchlistTvShowsPage.ROUTE_NAME);
               },
             ),
             ListTile(

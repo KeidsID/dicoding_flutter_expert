@@ -26,8 +26,9 @@ class _TvShowDetailPageState extends State<TvShowDetailPage> {
   void initState() {
     super.initState();
     Future.microtask(() {
-      Provider.of<TvShowDetailNotifier>(context, listen: false)
-          .fetchDetail(widget.id);
+      return Provider.of<TvShowDetailNotifier>(context, listen: false)
+        ..fetchDetail(widget.id)
+        ..loadWatchlistStatus(widget.id);
     });
   }
 
@@ -63,6 +64,7 @@ class _TvShowDetailPageState extends State<TvShowDetailPage> {
             child: TvShowDetailContent(
               tvShow: tvShow,
               recomms: prov.recommResults,
+              isWatchlisted: prov.isWatchlisted,
             ),
           );
         },
@@ -79,10 +81,12 @@ class TvShowDetailContent extends StatelessWidget {
     Key? key,
     required this.tvShow,
     required this.recomms,
+    required this.isWatchlisted,
   }) : super(key: key);
 
   final TvShowDetail tvShow;
   final List<TvShow> recomms;
+  final bool isWatchlisted;
 
   @override
   Widget build(BuildContext context) {
@@ -140,13 +144,50 @@ class TvShowDetailContent extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          tvShow.name,
-                          style: kHeading5,
+                        Text(tvShow.name, style: kHeading5),
+                        ElevatedButton(
+                          onPressed: () async {
+                            final prov =
+                                await Provider.of<TvShowDetailNotifier>(
+                              context,
+                              listen: false,
+                            );
+
+                            if (isWatchlisted) {
+                              prov.deleteFromWatchlist(tvShow);
+                            } else {
+                              prov.addToWatchlist(tvShow);
+                            }
+
+                            final msg = prov.watchlistMsg;
+                            final bool1 = msg ==
+                                TvShowDetailNotifier.addWatchlistSuccessMsg;
+                            final bool2 = msg ==
+                                TvShowDetailNotifier.removeWatchlistSuccessMsg;
+
+                            if (bool1 || bool2) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text(msg)),
+                              );
+                            } else {
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(content: Text(msg));
+                                },
+                              );
+                            }
+                          },
+                          child: Row(
+                            children: [
+                              isWatchlisted
+                                  ? Icon(Icons.check)
+                                  : Icon(Icons.add),
+                              Text('Watchlist')
+                            ],
+                          ),
                         ),
-                        Text(
-                          _showGenres(tvShow.genres),
-                        ),
+                        Text(_showGenres(tvShow.genres)),
                         Row(
                           children: [
                             RatingBarIndicator(
@@ -165,18 +206,10 @@ class TvShowDetailContent extends StatelessWidget {
                         Text('Total Episodes: ${tvShow.numberOfEpisodes}'),
                         Text('Total Seasons: ${tvShow.numberOfSeasons}'),
                         SizedBox(height: 16),
-                        Text(
-                          'Overview',
-                          style: kHeading6,
-                        ),
-                        Text(
-                          tvShow.overview,
-                        ),
+                        Text('Overview', style: kHeading6),
+                        Text(tvShow.overview),
                         SizedBox(height: 16),
-                        Text(
-                          'Recommendations',
-                          style: kHeading6,
-                        ),
+                        Text('Recommendations', style: kHeading6),
                         _recommendations(),
                       ],
                     ),

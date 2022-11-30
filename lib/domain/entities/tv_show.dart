@@ -14,16 +14,23 @@ class TvShow extends Equatable {
     required this.originalName,
   });
 
-  final String? posterPath;
-  final double popularity;
-  final int id;
-  final String? backdropPath;
-  final double voteAverage;
-  final String overview;
-  final List<int> genreIds;
-  final int voteCount;
-  final String name;
-  final String originalName;
+  TvShow.watchlist({
+    required this.id,
+    required this.name,
+    required this.overview,
+    required this.posterPath,
+  });
+
+  String? posterPath;
+  double? popularity;
+  int id;
+  String? backdropPath;
+  double? voteAverage;
+  String overview;
+  List<int>? genreIds;
+  int? voteCount;
+  String name;
+  String? originalName;
 
   @override
   List<Object?> get props {

@@ -48,7 +48,7 @@ class TvShowModel extends Equatable {
       id: id,
       backdropPath: backdropPath,
       voteAverage: voteAverage,
-      overview: overview,
+      overview: overview != '' ? overview : 'No Data',
       genreIds: genreIds,
       voteCount: voteCount,
       name: name,

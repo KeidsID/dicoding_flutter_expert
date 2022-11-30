@@ -15,12 +15,17 @@ import '../../dummy_data/tv_show/tv_show_dummy_obj.dart';
 import '../../helpers/test_helper.mocks.dart';
 
 void main() {
-  late MockTvShowRemoteDataSource mockRDataSource;
+  late MockTvShowRemoteDataSource mockRemoteDS;
+  late MockTvShowLocalDataSource mockLocalDS;
   late TvShowRepositoryImpl repo;
 
   setUp(() {
-    mockRDataSource = MockTvShowRemoteDataSource();
-    repo = TvShowRepositoryImpl(remoteDataSource: mockRDataSource);
+    mockRemoteDS = MockTvShowRemoteDataSource();
+    mockLocalDS = MockTvShowLocalDataSource();
+    repo = TvShowRepositoryImpl(
+      remoteDataSource: mockRemoteDS,
+      localDataSource: mockLocalDS,
+    );
   });
 
   final tvShowModels = <TvShowModel>[testTvShowModel];
@@ -33,14 +38,14 @@ void main() {
         'Return List<TvShow> when remote data source call is successful',
         () async {
           // arrange
-          when(mockRDataSource.getAiringTodayTvShows())
+          when(mockRemoteDS.getAiringTodayTvShows())
               .thenAnswer((_) async => tvShowModels);
 
           // act
           final result = await repo.getAiringTodayTvShows();
 
           // assert
-          verify(mockRDataSource.getAiringTodayTvShows());
+          verify(mockRemoteDS.getAiringTodayTvShows());
 
           // https://github.com/spebbe/dartz/issues/80
           final resultList = result | [];
@@ -51,14 +56,14 @@ void main() {
         'Return ServerFailure() when remote data source call is fail',
         () async {
           // arrange
-          when(mockRDataSource.getAiringTodayTvShows())
+          when(mockRemoteDS.getAiringTodayTvShows())
               .thenThrow(ServerException());
 
           // act
           final result = await repo.getAiringTodayTvShows();
 
           // assert
-          verify(mockRDataSource.getAiringTodayTvShows());
+          verify(mockRemoteDS.getAiringTodayTvShows());
           expect(result, equals(Left(ServerFailure(''))));
         },
       );
@@ -68,14 +73,14 @@ void main() {
           // arrange
           const failMsg = 'Failed to connect to the network';
 
-          when(mockRDataSource.getAiringTodayTvShows())
+          when(mockRemoteDS.getAiringTodayTvShows())
               .thenThrow(SocketException(failMsg));
 
           // act
           final result = await repo.getAiringTodayTvShows();
 
           // assert
-          verify(mockRDataSource.getAiringTodayTvShows());
+          verify(mockRemoteDS.getAiringTodayTvShows());
           expect(result, equals(Left(ConnectionFailure(failMsg))));
         },
       );
@@ -85,14 +90,14 @@ void main() {
         'Return List<TvShow> when remote data source call is successful',
         () async {
           // arrange
-          when(mockRDataSource.getPopularTvShows())
+          when(mockRemoteDS.getPopularTvShows())
               .thenAnswer((_) async => tvShowModels);
 
           // act
           final result = await repo.getPopularTvShows();
 
           // assert
-          verify(mockRDataSource.getPopularTvShows());
+          verify(mockRemoteDS.getPopularTvShows());
 
           // https://github.com/spebbe/dartz/issues/80
           final resultList = result | [];
@@ -103,14 +108,13 @@ void main() {
         'Return ServerFailure() when remote data source call is fail',
         () async {
           // arrange
-          when(mockRDataSource.getPopularTvShows())
-              .thenThrow(ServerException());
+          when(mockRemoteDS.getPopularTvShows()).thenThrow(ServerException());
 
           // act
           final result = await repo.getPopularTvShows();
 
           // assert
-          verify(mockRDataSource.getPopularTvShows());
+          verify(mockRemoteDS.getPopularTvShows());
           expect(result, equals(Left(ServerFailure(''))));
         },
       );
@@ -120,14 +124,14 @@ void main() {
           // arrange
           const failMsg = 'Failed to connect to the network';
 
-          when(mockRDataSource.getPopularTvShows())
+          when(mockRemoteDS.getPopularTvShows())
               .thenThrow(SocketException(failMsg));
 
           // act
           final result = await repo.getPopularTvShows();
 
           // assert
-          verify(mockRDataSource.getPopularTvShows());
+          verify(mockRemoteDS.getPopularTvShows());
           expect(result, equals(Left(ConnectionFailure(failMsg))));
         },
       );
@@ -137,14 +141,14 @@ void main() {
         'Return List<TvShow> when remote data source call is successful',
         () async {
           // arrange
-          when(mockRDataSource.getTopRatedTvShows())
+          when(mockRemoteDS.getTopRatedTvShows())
               .thenAnswer((_) async => tvShowModels);
 
           // act
           final result = await repo.getTopRatedTvShows();
 
           // assert
-          verify(mockRDataSource.getTopRatedTvShows());
+          verify(mockRemoteDS.getTopRatedTvShows());
 
           // https://github.com/spebbe/dartz/issues/80
           final resultList = result | [];
@@ -155,14 +159,13 @@ void main() {
         'Return ServerFailure() when remote data source call is fail',
         () async {
           // arrange
-          when(mockRDataSource.getTopRatedTvShows())
-              .thenThrow(ServerException());
+          when(mockRemoteDS.getTopRatedTvShows()).thenThrow(ServerException());
 
           // act
           final result = await repo.getTopRatedTvShows();
 
           // assert
-          verify(mockRDataSource.getTopRatedTvShows());
+          verify(mockRemoteDS.getTopRatedTvShows());
           expect(result, equals(Left(ServerFailure(''))));
         },
       );
@@ -172,14 +175,14 @@ void main() {
           // arrange
           const failMsg = 'Failed to connect to the network';
 
-          when(mockRDataSource.getTopRatedTvShows())
+          when(mockRemoteDS.getTopRatedTvShows())
               .thenThrow(SocketException(failMsg));
 
           // act
           final result = await repo.getTopRatedTvShows();
 
           // assert
-          verify(mockRDataSource.getTopRatedTvShows());
+          verify(mockRemoteDS.getTopRatedTvShows());
           expect(result, equals(Left(ConnectionFailure(failMsg))));
         },
       );
@@ -211,14 +214,14 @@ void main() {
         'Return TvShowDetail() when remote data source call is successful',
         () async {
           // arrange
-          when(mockRDataSource.getTvShowDetail(tvShowId))
+          when(mockRemoteDS.getTvShowDetail(tvShowId))
               .thenAnswer((_) async => detailResponse);
 
           // act
           final result = await repo.getTvShowDetail(tvShowId);
 
           // assert
-          verify(mockRDataSource.getTvShowDetail(tvShowId));
+          verify(mockRemoteDS.getTvShowDetail(tvShowId));
           expect(result, equals(Right(testTvShowDetail)));
         },
       );
@@ -226,14 +229,14 @@ void main() {
         'Return ServerFailure() when remote data source call is fail',
         () async {
           // arrange
-          when(mockRDataSource.getTvShowDetail(tvShowId))
+          when(mockRemoteDS.getTvShowDetail(tvShowId))
               .thenThrow(ServerException());
 
           // act
           final result = await repo.getTvShowDetail(tvShowId);
 
           // assert
-          verify(mockRDataSource.getTvShowDetail(tvShowId));
+          verify(mockRemoteDS.getTvShowDetail(tvShowId));
           expect(result, equals(Left(ServerFailure(''))));
         },
       );
@@ -243,14 +246,14 @@ void main() {
           // arrange
           const failMsg = 'Failed to connect to the network';
 
-          when(mockRDataSource.getTvShowDetail(tvShowId))
+          when(mockRemoteDS.getTvShowDetail(tvShowId))
               .thenThrow(SocketException(failMsg));
 
           // act
           final result = await repo.getTvShowDetail(tvShowId);
 
           // assert
-          verify(mockRDataSource.getTvShowDetail(tvShowId));
+          verify(mockRemoteDS.getTvShowDetail(tvShowId));
           expect(result, equals(Left(ConnectionFailure(failMsg))));
         },
       );
@@ -260,14 +263,14 @@ void main() {
         'Return List<TvShow> when remote data source call is successful',
         () async {
           // arrange
-          when(mockRDataSource.getTvShowRecommendations(tvShowId))
+          when(mockRemoteDS.getTvShowRecommendations(tvShowId))
               .thenAnswer((_) async => tvShowModels);
 
           // act
           final result = await repo.getTvShowRecommendations(tvShowId);
 
           // assert
-          verify(mockRDataSource.getTvShowRecommendations(tvShowId));
+          verify(mockRemoteDS.getTvShowRecommendations(tvShowId));
 
           // https://github.com/spebbe/dartz/issues/80
           final resultList = result | [];
@@ -278,14 +281,14 @@ void main() {
         'Return ServerFailure() when remote data source call is fail',
         () async {
           // arrange
-          when(mockRDataSource.getTvShowRecommendations(tvShowId))
+          when(mockRemoteDS.getTvShowRecommendations(tvShowId))
               .thenThrow(ServerException());
 
           // act
           final result = await repo.getTvShowRecommendations(tvShowId);
 
           // assert
-          verify(mockRDataSource.getTvShowRecommendations(tvShowId));
+          verify(mockRemoteDS.getTvShowRecommendations(tvShowId));
           expect(result, equals(Left(ServerFailure(''))));
         },
       );
@@ -295,14 +298,14 @@ void main() {
           // arrange
           const failMsg = 'Failed to connect to the network';
 
-          when(mockRDataSource.getTvShowRecommendations(tvShowId))
+          when(mockRemoteDS.getTvShowRecommendations(tvShowId))
               .thenThrow(SocketException(failMsg));
 
           // act
           final result = await repo.getTvShowRecommendations(tvShowId);
 
           // assert
-          verify(mockRDataSource.getTvShowRecommendations(tvShowId));
+          verify(mockRemoteDS.getTvShowRecommendations(tvShowId));
           expect(result, equals(Left(ConnectionFailure(failMsg))));
         },
       );
@@ -313,14 +316,14 @@ void main() {
         'Return List<TvShow> when remote data source call is successful',
         () async {
           // arrange
-          when(mockRDataSource.searchTvShows(query))
+          when(mockRemoteDS.searchTvShows(query))
               .thenAnswer((_) async => tvShowModels);
 
           // act
           final result = await repo.searchTvShows(query);
 
           // assert
-          verify(mockRDataSource.searchTvShows(query));
+          verify(mockRemoteDS.searchTvShows(query));
 
           // https://github.com/spebbe/dartz/issues/80
           final resultList = result | [];
@@ -331,14 +334,13 @@ void main() {
         'Return ServerFailure() when remote data source call is fail',
         () async {
           // arrange
-          when(mockRDataSource.searchTvShows(query))
-              .thenThrow(ServerException());
+          when(mockRemoteDS.searchTvShows(query)).thenThrow(ServerException());
 
           // act
           final result = await repo.searchTvShows(query);
 
           // assert
-          verify(mockRDataSource.searchTvShows(query));
+          verify(mockRemoteDS.searchTvShows(query));
           expect(result, equals(Left(ServerFailure(''))));
         },
       );
@@ -348,14 +350,14 @@ void main() {
           // arrange
           const failMsg = 'Failed to connect to the network';
 
-          when(mockRDataSource.searchTvShows(query))
+          when(mockRemoteDS.searchTvShows(query))
               .thenThrow(SocketException(failMsg));
 
           // act
           final result = await repo.searchTvShows(query);
 
           // assert
-          verify(mockRDataSource.searchTvShows(query));
+          verify(mockRemoteDS.searchTvShows(query));
           expect(result, equals(Left(ConnectionFailure(failMsg))));
         },
       );

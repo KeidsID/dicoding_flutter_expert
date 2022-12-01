@@ -179,6 +179,7 @@ class TvShowDetailContent extends StatelessWidget {
                             }
                           },
                           child: Row(
+                            mainAxisSize: MainAxisSize.min,
                             children: [
                               isWatchlisted
                                   ? Icon(Icons.check)

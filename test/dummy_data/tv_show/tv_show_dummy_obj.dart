@@ -2,11 +2,12 @@ import 'package:ditonton/data/models/genre_model.dart';
 import 'package:ditonton/data/models/tv_show_models/tv_show_detail_model.dart';
 import 'package:ditonton/data/models/tv_show_models/tv_show_model.dart';
 import 'package:ditonton/data/models/tv_show_models/tv_show_response.dart';
+import 'package:ditonton/data/models/tv_show_models/tv_show_table.dart';
 import 'package:ditonton/domain/entities/genre.dart';
 import 'package:ditonton/domain/entities/tv_show.dart';
 import 'package:ditonton/domain/entities/tv_show_detail.dart';
 
-final testTvShow = TvShow(
+final dummyTvShow = TvShow(
   posterPath: '/vC324sdfcS313vh9QXwijLIHPJp.jpg',
   popularity: 47.432451,
   id: 31917,
@@ -19,7 +20,7 @@ final testTvShow = TvShow(
   name: 'Pretty Little Liars',
   originalName: 'Pretty Little Liars',
 );
-final testTvShowModel = TvShowModel(
+final dummyTvShowModel = TvShowModel(
   posterPath: '/vC324sdfcS313vh9QXwijLIHPJp.jpg',
   popularity: 47.432451,
   id: 31917,
@@ -32,13 +33,13 @@ final testTvShowModel = TvShowModel(
   name: 'Pretty Little Liars',
   originalName: 'Pretty Little Liars',
 );
-final testTvShowResponse = TvShowResponse(
+final dummyTvShowResponse = TvShowResponse(
   page: 1,
-  results: [testTvShowModel],
+  results: [dummyTvShowModel],
   totalResults: 1,
   totalPages: 1,
 );
-final testTvShowDetail = TvShowDetail(
+final dummyTvShowDetail = TvShowDetail(
   backdropPath: '/suopoADq0k8YZr4dQXcU6pToj6s.jpg',
   genres: <Genre>[
     Genre(id: 10765, name: 'Sci-Fi & Fantasy'),
@@ -58,7 +59,7 @@ final testTvShowDetail = TvShowDetail(
   voteAverage: 8.3,
   voteCount: 11504,
 );
-final testTvShowDetailModel = TvShowDetailModel(
+final dummyTvShowDetailModel = TvShowDetailModel(
   backdropPath: '/suopoADq0k8YZr4dQXcU6pToj6s.jpg',
   genres: <GenreModel>[
     GenreModel(id: 10765, name: 'Sci-Fi & Fantasy'),
@@ -78,4 +79,27 @@ final testTvShowDetailModel = TvShowDetailModel(
   posterPath: '/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg',
   voteAverage: 8.3,
   voteCount: 11504,
+);
+final dummyTvTable = TvShowTable(
+  id: 31917,
+  name: 'Pretty Little Liars',
+  overview:
+      'Based on the Pretty Little Liars series of young adult novels by Sara Shepard, the series follows the lives of four girls — Spencer, Hanna, Aria, and Emily — whose clique falls apart after the disappearance of their queen bee, Alison. One year later, they begin receiving messages from someone using the name \"A\" who threatens to expose their secrets — including long-hidden ones they thought only Alison knew.',
+  posterPath: '/vC324sdfcS313vh9QXwijLIHPJp.jpg',
+);
+final dummyTvShowFromDb = dummyTvTable.toEntity();
+final dummyTvShowDetailForDbTest = TvShowDetail(
+  backdropPath: '/',
+  genres: [],
+  id: 31917,
+  name: 'Pretty Little Liars',
+  numberOfEpisodes: 1,
+  numberOfSeasons: 0,
+  originalName: 'Pretty Little Liars',
+  overview:
+      'Based on the Pretty Little Liars series of young adult novels by Sara Shepard, the series follows the lives of four girls — Spencer, Hanna, Aria, and Emily — whose clique falls apart after the disappearance of their queen bee, Alison. One year later, they begin receiving messages from someone using the name \"A\" who threatens to expose their secrets — including long-hidden ones they thought only Alison knew.',
+  popularity: 2.5,
+  posterPath: '/vC324sdfcS313vh9QXwijLIHPJp.jpg',
+  voteAverage: 2.5,
+  voteCount: 10,
 );

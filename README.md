@@ -19,7 +19,7 @@ Mandatory Tasks:
 - [x] TV Show Detail Page with Recommendations.
 - [x] Search TV Show Feature.
 - [x] TV Show Watchlist/Bookmark Feature.
-- [ ] Unit testing with minimum testing coverage of 70%.
+- [x] Unit testing with minimum testing coverage of 70%.
 - [x] Implementing a clean architecture.
 
 Optional Tasks:
@@ -62,40 +62,62 @@ Add TV show feature on [ditonton App][project_starter].
 
 - How to check testing coverage:
 
-  - Install lcov:
-    - For **Linux** user, run the command below at terminal:
-      ```
-      sudo apt-get update -qq -y
-      sudo apt-get install lcov -y
-      ```
-    - For **Mac** user, run the command below at terminal:
-      ```
-      brew install lcov
-      ```
-    - For **Windows** user, follow the guide below:
-      - Install [Chocolatey](https://chocolatey.org/install).
-      - Then run the command below at terminal:
-        ```
-        choco install lcov
-        ```
-      - Check GENTHTML and LCOV_HOME at **System variables > Environtment Variabel**. If it's not available, you can add a new variable with a value like the following:
-        | Variable | Value |
-        | - | - |
-        | GENTHTML | C:\ProgramData\chocolatey\lib\lcov\tools\bin\genhtml |
-        | LCOV_HOME | C:\ProgramData\chocolatey\lib\lcov\tools |
-  - Then run the `test.sh` file with the following command in the terminal or Powershell:
+  *[Guide Source](https://stackoverflow.com/a/53663093)
 
-    - Terminal
+  - [test_cov_console package](https://pub.dev/packages/test_cov_console):
+
+    - Install globally
       ```
-      test.sh
+      flutter pub global activate test_cov_console
       ```
-    - Powershell
+    - Run globally
+      ```
+      flutter pub global run test_cov_console
+      ```
+
+  - Using lcov:
+
+    - Install lcov:
+
+      - For **Linux** user, run the command below at terminal:
+        ```
+        sudo apt-get update -qq -y
+        sudo apt-get install lcov -y
+        ```
+      - For **Mac** user, run the command below at terminal:
+        ```
+        brew install lcov
+        ```
+      - For **Windows** user, follow the guide below:
+        - Install [Chocolatey](https://chocolatey.org/install).
+        - Then run the command below at terminal:
+          ```
+          choco install lcov
+          ```
+        - Check GENTHTML and LCOV_HOME at **System variables > Environtment Variabel**. If it's not available, you can add a new variable with a value like the following:
+          | Variable | Value |
+          | - | - |
+          | GENTHTML | C:\ProgramData\chocolatey\lib\lcov\tools\bin\genhtml |
+          | LCOV_HOME | C:\ProgramData\chocolatey\lib\lcov\tools |
+
+    - Then run command below
 
       ```
+      flutter test --coverage
+      genhtml coverage/lcov.info -o coverage/html
+      ```
+
+      or
+
+      ```
+      # cmd
+      tesh.sh
+
+      # gitbash etc
       ./test.sh
       ```
 
-    This process will generate the `lcov.info` file and `coverage folder` associated with the coverage report.
+    - [genhtml not found issue](https://stackoverflow.com/questions/62184806/how-to-view-code-coverage-as-html-in-windows)
 
 ### 6. Implementing a clean architecture
 

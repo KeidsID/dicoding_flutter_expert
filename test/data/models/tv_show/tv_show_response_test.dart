@@ -17,7 +17,7 @@ void main() {
     final actual = TvShowResponse.fromJson(jsonStr);
 
     // assert
-    final matcher = testTvShowResponse;
+    final matcher = dummyTvShowResponse;
     expect(actual, matcher);
   });
 }

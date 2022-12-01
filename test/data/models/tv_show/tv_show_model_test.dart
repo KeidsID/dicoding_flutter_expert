@@ -18,14 +18,14 @@ void main() {
       final result = TvShowModel.fromJson(JSON);
 
       // assert
-      expect(result, testTvShowModel);
+      expect(result, dummyTvShowModel);
     });
     test('Can convert to entity (Return TvShow)', () {
       // act
-      final result = testTvShowModel.toEntity();
+      final result = dummyTvShowModel.toEntity();
 
       // assert
-      expect(result, testTvShow);
+      expect(result, dummyTvShow);
     });
   });
 }

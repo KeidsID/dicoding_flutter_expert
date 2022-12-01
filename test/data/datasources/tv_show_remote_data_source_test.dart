@@ -44,7 +44,7 @@ void main() {
         final actual = await dataSource.getAiringTodayTvShows();
 
         // assert
-        expect(actual, equals(testTvShowResponse.results));
+        expect(actual, equals(dummyTvShowResponse.results));
       });
       test('Throw a ServerException when the response code is NOT 200',
           () async {
@@ -77,7 +77,7 @@ void main() {
         final actual = await dataSource.getPopularTvShows();
 
         // assert
-        expect(actual, equals(testTvShowResponse.results));
+        expect(actual, equals(dummyTvShowResponse.results));
       });
       test('Throw a ServerException when the response code is NOT 200',
           () async {
@@ -111,7 +111,7 @@ void main() {
         final actual = await dataSource.getTopRatedTvShows();
 
         // assert
-        expect(actual, equals(testTvShowResponse.results));
+        expect(actual, equals(dummyTvShowResponse.results));
       });
       test('Throw a ServerException when the response code is NOT 200',
           () async {
@@ -146,7 +146,7 @@ void main() {
         final actual = await dataSource.getTvShowDetail(tId);
 
         // assert
-        expect(actual, equals(testTvShowDetailModel));
+        expect(actual, equals(dummyTvShowDetailModel));
       });
       test('Throw a ServerException when the response code is NOT 200',
           () async {
@@ -181,7 +181,7 @@ void main() {
         final actual = await dataSource.getTvShowRecommendations(tId);
 
         // assert
-        expect(actual, equals(testTvShowResponse.results));
+        expect(actual, equals(dummyTvShowResponse.results));
       });
       test('Throw a ServerException when the response code is NOT 200',
           () async {
@@ -217,7 +217,7 @@ void main() {
         final actual = await dataSource.searchTvShows(query);
 
         // assert
-        expect(actual, equals(testTvShowResponse.results));
+        expect(actual, equals(dummyTvShowResponse.results));
       });
       test('Throw a ServerException when the response code is NOT 200',
           () async {

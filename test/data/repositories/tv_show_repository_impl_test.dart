@@ -28,9 +28,9 @@ void main() {
     );
   });
 
-  final tvShowModels = <TvShowModel>[testTvShowModel];
-  final tvShows = <TvShow>[testTvShow];
-  final int tvShowId = testTvShow.id;
+  final tvShowModels = <TvShowModel>[dummyTvShowModel];
+  final tvShows = <TvShow>[dummyTvShow];
+  final int tvShowId = dummyTvShow.id;
 
   group('TvShowRepositoryImpl', () {
     group('.getAiringTodayTvShows() test:', () {
@@ -68,7 +68,7 @@ void main() {
         },
       );
       test(
-        'Return ConnectionFailure() when device is not connected to internet',
+        'Return ConnectionFailure() when device is not connected to internet\n',
         () async {
           // arrange
           const failMsg = 'Failed to connect to the network';
@@ -119,7 +119,7 @@ void main() {
         },
       );
       test(
-        'Return ConnectionFailure() when device is not connected to internet',
+        'Return ConnectionFailure() when device is not connected to internet\n',
         () async {
           // arrange
           const failMsg = 'Failed to connect to the network';
@@ -170,7 +170,7 @@ void main() {
         },
       );
       test(
-        'Return ConnectionFailure() when device is not connected to internet',
+        'Return ConnectionFailure() when device is not connected to internet\n',
         () async {
           // arrange
           const failMsg = 'Failed to connect to the network';
@@ -222,7 +222,7 @@ void main() {
 
           // assert
           verify(mockRemoteDS.getTvShowDetail(tvShowId));
-          expect(result, equals(Right(testTvShowDetail)));
+          expect(result, equals(Right(dummyTvShowDetail)));
         },
       );
       test(
@@ -241,7 +241,7 @@ void main() {
         },
       );
       test(
-        'Return ConnectionFailure() when device is not connected to internet',
+        'Return ConnectionFailure() when device is not connected to internet\n',
         () async {
           // arrange
           const failMsg = 'Failed to connect to the network';
@@ -293,7 +293,7 @@ void main() {
         },
       );
       test(
-        'Return ConnectionFailure() when device is not connected to internet',
+        'Return ConnectionFailure() when device is not connected to internet\n',
         () async {
           // arrange
           const failMsg = 'Failed to connect to the network';
@@ -345,7 +345,7 @@ void main() {
         },
       );
       test(
-        'Return ConnectionFailure() when device is not connected to internet',
+        'Return ConnectionFailure() when device is not connected to internet\n',
         () async {
           // arrange
           const failMsg = 'Failed to connect to the network';
@@ -361,6 +361,93 @@ void main() {
           expect(result, equals(Left(ConnectionFailure(failMsg))));
         },
       );
+    });
+    group('.getWatchlistTvShows() test:', () {
+      test('Return List<TvShow> from local data source\n', () async {
+        // arrange
+        when(mockLocalDS.getWatchlistTvShows())
+            .thenAnswer((_) async => [dummyTvTable]);
+
+        // act
+        final result = await repo.getWatchlistTvShows();
+
+        // assert
+        final actual = result | [];
+        expect(actual, [dummyTvShowFromDb]);
+      });
+    });
+    group('.isWatchlisted() test:', () {
+      test('Return true when data is found', () async {
+        // arrange
+        when(mockLocalDS.getTvShowById(1))
+            .thenAnswer((_) async => dummyTvTable);
+
+        // act
+        final actual = await repo.isWatchlisted(1);
+
+        // assert
+        expect(actual, true);
+      });
+      test('Return false when data is not found\n', () async {
+        // arrange
+        when(mockLocalDS.getTvShowById(1)).thenAnswer((_) async => null);
+
+        // act
+        final actual = await repo.isWatchlisted(1);
+
+        // assert
+        expect(actual, false);
+      });
+    });
+    group('.saveToWatchlist() test:', () {
+      test('Return Right(String) when saving successful', () async {
+        // arrange
+        when(mockLocalDS.insertWatchlist(dummyTvTable))
+            .thenAnswer((_) async => 'Success');
+
+        // act
+        final actual = await repo.saveToWatchlist(dummyTvShowDetailForDbTest);
+
+        // assert
+        expect(actual, Right('Success'));
+      });
+      test('Return Left(DatabaseFailure) when saving UnSuccessful\n', () async {
+        // arrange
+        when(mockLocalDS.insertWatchlist(dummyTvTable))
+            .thenThrow(DatabaseException('Fail to save'));
+
+        // act
+        final actual = await repo.saveToWatchlist(dummyTvShowDetailForDbTest);
+
+        // assert
+        expect(actual, Left(DatabaseFailure('Fail to save')));
+      });
+    });
+    group('.removeFromWatchlist() test:', () {
+      test('Return Right(String) when remove successful', () async {
+        // arrange
+        when(mockLocalDS.removeWatchlist(dummyTvTable))
+            .thenAnswer((_) async => 'Success');
+
+        // act
+        final actual =
+            await repo.removeFromWatchlist(dummyTvShowDetailForDbTest);
+
+        // assert
+        expect(actual, Right('Success'));
+      });
+      test('Return Left(DatabaseFailure) when remove UnSuccessful\n', () async {
+        // arrange
+        when(mockLocalDS.removeWatchlist(dummyTvTable))
+            .thenThrow(DatabaseException('Fail to remove'));
+
+        // act
+        final actual =
+            await repo.removeFromWatchlist(dummyTvShowDetailForDbTest);
+
+        // assert
+        expect(actual, Left(DatabaseFailure('Fail to remove')));
+      });
     });
   });
 }

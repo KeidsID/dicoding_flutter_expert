@@ -17,7 +17,7 @@ void main() {
   });
 
   final tvShows = <TvShow>[];
-  final tvShows2 = <TvShow>[testTvShow];
+  final tvShows2 = <TvShow>[dummyTvShow];
 
   group('GetTopRatedTvShows Tests:', () {
     test('Get list of Tv Shows from repo', () async {

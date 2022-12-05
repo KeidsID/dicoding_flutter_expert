@@ -37,7 +37,7 @@ class TvShowListNotifier extends ChangeNotifier {
 
   String get message => _message;
 
-  Future<void> fetchOnAirTvShows() async {
+  Future<void> fetchAiringTodayTvShows() async {
     _airingTodayState = RequestState.Loading;
     notifyListeners();
 

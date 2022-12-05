@@ -29,7 +29,7 @@ void main() {
     group('.getAiringTodayTvShows() test:', () {
       test('Return List<TvShowModel> when the response code is 200', () async {
         // arrange
-        when(mockClient.get(Uri.parse('$BASE_URL/tv/airing_today?$API_KEY')))
+        when(mockClient.get(Uri.parse('$BASE_URL/tv/airing_today?$API_KEY&page=1')))
             .thenAnswer(
           (_) async => http.Response(
             tvShowListJsonStr,
@@ -49,7 +49,7 @@ void main() {
       test('Throw a ServerException when the response code is NOT 200',
           () async {
         // arrange
-        when(mockClient.get(Uri.parse('$BASE_URL/tv/airing_today?$API_KEY')))
+        when(mockClient.get(Uri.parse('$BASE_URL/tv/airing_today?$API_KEY&page=1')))
             .thenAnswer((_) async => http.Response('Not Found', 404));
 
         // act

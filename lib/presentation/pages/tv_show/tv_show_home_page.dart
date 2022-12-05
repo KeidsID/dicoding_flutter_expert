@@ -1,3 +1,4 @@
+import 'package:ditonton/presentation/pages/tv_show/airing_today_tv_shows_page.dart';
 import 'package:ditonton/presentation/pages/tv_show/popular_tv_shows_page.dart';
 import 'package:ditonton/presentation/pages/tv_show/search_tv_show_page.dart';
 import 'package:ditonton/presentation/pages/tv_show/top_rated_tv_shows_page.dart';
@@ -26,7 +27,7 @@ class _TvShowHomePageState extends State<TvShowHomePage> {
     super.initState();
     Future.microtask(() {
       return Provider.of<TvShowListNotifier>(context, listen: false)
-        ..fetchOnAirTvShows()
+        ..fetchAiringTodayTvShows()
         ..fetchPopularTvShows()
         ..fetchTopRatedTvShows();
     });
@@ -97,9 +98,14 @@ class _TvShowHomePageState extends State<TvShowHomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Airing Today',
-                style: kHeading6,
+              _buildSubHeading(
+                title: 'Airing Today',
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    AiringTodayTvShowsPage.ROUTE_NAME,
+                  );
+                },
               ),
               Consumer<TvShowListNotifier>(builder: (context, data, child) {
                 final state = data.airingTodayState;

@@ -21,9 +21,11 @@ class TvShowRepositoryImpl implements TvShowRepository {
   final TvShowLocalDataSource localDataSource;
 
   @override
-  Future<Either<Failure, List<TvShow>>> getAiringTodayTvShows() async {
+  Future<Either<Failure, List<TvShow>>> getAiringTodayTvShows({
+    int page = 1,
+  }) async {
     try {
-      final result = await remoteDataSource.getAiringTodayTvShows();
+      final result = await remoteDataSource.getAiringTodayTvShows(page: page);
       return Right(result.map((model) => model.toEntity()).toList());
     } on ServerException {
       return Left(ServerFailure(''));

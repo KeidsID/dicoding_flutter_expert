@@ -5,7 +5,7 @@ import '../entities/tv_show.dart';
 import '../entities/tv_show_detail.dart';
 
 abstract class TvShowRepository {
-  Future<Either<Failure, List<TvShow>>> getAiringTodayTvShows();
+  Future<Either<Failure, List<TvShow>>> getAiringTodayTvShows({int page = 1});
   Future<Either<Failure, List<TvShow>>> getPopularTvShows({int page = 1});
   Future<Either<Failure, List<TvShow>>> getTopRatedTvShows({int page = 1});
   Future<Either<Failure, TvShowDetail>> getTvShowDetail(int id);

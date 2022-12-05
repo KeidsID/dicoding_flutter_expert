@@ -19,7 +19,7 @@ Mandatory Tasks:
 - [x] TV Show Detail Page with Recommendations.
 - [x] Search TV Show Feature.
 - [x] TV Show Watchlist/Bookmark Feature.
-- [x] Unit testing with minimum testing coverage of 70%.
+- [x] Unit testing for every Tv Show feature with min. 70% coverage.
 - [x] Implementing a clean architecture.
 
 Optional Tasks:
@@ -37,8 +37,9 @@ Add TV show feature on [ditonton App][project_starter].
 ### 1. TV Show List Page
 
 - Displaying a list of TV shows on the available page (Homepage) or creating a new page is allowed.
-- On-air, popular, and the top rated list included.
-- Each category list (On air, etc...) is separated.
+- Airing today, popular, and the top rated list included.
+- Each category list is separated.
+- Each category also has its own page (Including airing today)
 
 ### 2. TV Show Detail Page
 
@@ -58,66 +59,71 @@ Add TV show feature on [ditonton App][project_starter].
 
 ### 5. Automated Testing Included
 
-- the TV show features must-have unit testing with a minimum testing coverage of 70%.
+- **Every** TV show features **must-have unit testing** with a minimum testing coverage of 70%.
 
 - How to check testing coverage:
 
-  *[Guide Source](https://stackoverflow.com/a/53663093)
+  - Generate **lcov.info**:
 
-  - [test_cov_console package](https://pub.dev/packages/test_cov_console):
+    ```
+    flutter test --coverage
+    ```
 
-    - Install globally
-      ```
-      flutter pub global activate test_cov_console
-      ```
-    - Run globally
-      ```
-      flutter pub global run test_cov_console
-      ```
+  - [Then guide display lcov.info](https://stackoverflow.com/a/53663093):
 
-  - Using lcov:
+    - [test_cov_console package](https://pub.dev/packages/test_cov_console):
 
-    - Install lcov:
-
-      - For **Linux** user, run the command below at terminal:
+      - Install globally
         ```
-        sudo apt-get update -qq -y
-        sudo apt-get install lcov -y
+        flutter pub global activate test_cov_console
         ```
-      - For **Mac** user, run the command below at terminal:
+      - Run globally (Need lcov.info)
         ```
-        brew install lcov
+        flutter pub global run test_cov_console
         ```
-      - For **Windows** user, follow the guide below:
-        - Install [Chocolatey](https://chocolatey.org/install).
-        - Then run the command below at terminal:
+
+    - Using lcov:
+
+      - Install lcov:
+
+        - For **Linux** user, run the command below at terminal:
           ```
-          choco install lcov
+          sudo apt-get update -qq -y
+          sudo apt-get install lcov -y
           ```
-        - Check GENTHTML and LCOV_HOME at **System variables > Environtment Variabel**. If it's not available, you can add a new variable with a value like the following:
-          | Variable | Value |
-          | - | - |
-          | GENTHTML | C:\ProgramData\chocolatey\lib\lcov\tools\bin\genhtml |
-          | LCOV_HOME | C:\ProgramData\chocolatey\lib\lcov\tools |
+        - For **Mac** user, run the command below at terminal:
+          ```
+          brew install lcov
+          ```
+        - For **Windows** user, follow the guide below:
+          - Install [Chocolatey](https://chocolatey.org/install).
+          - Then run the command below at terminal:
+            ```
+            choco install lcov
+            ```
+          - Check GENTHTML and LCOV_HOME at **System variables > Environtment Variabel**. If it's not available, you can add a new variable with a value like the following:
+            | Variable | Value |
+            | - | - |
+            | GENTHTML | C:\ProgramData\chocolatey\lib\lcov\tools\bin\genhtml |
+            | LCOV_HOME | C:\ProgramData\chocolatey\lib\lcov\tools |
 
-    - Then run command below
+      - Then run command below
 
-      ```
-      flutter test --coverage
-      genhtml coverage/lcov.info -o coverage/html
-      ```
+        ```
+        genhtml coverage/lcov.info -o coverage/html
+        ```
 
-      or
+        or
 
-      ```
-      # cmd
-      tesh.sh
+        ```
+        # For cmd
+        tesh.sh
 
-      # gitbash etc
-      ./test.sh
-      ```
+        # For gitbash, etc.
+        ./test.sh
+        ```
 
-    - [genhtml not found issue](https://stackoverflow.com/questions/62184806/how-to-view-code-coverage-as-html-in-windows)
+      - [genhtml not found issue](https://stackoverflow.com/questions/62184806/how-to-view-code-coverage-as-html-in-windows)
 
 ### 6. Implementing a clean architecture
 

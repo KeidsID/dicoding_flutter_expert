@@ -9,5 +9,7 @@ class GetAiringTodayTvShows {
 
   final TvShowRepository repo;
 
-  Future<Either<Failure, List<TvShow>>> execute() => repo.getAiringTodayTvShows();
+  Future<Either<Failure, List<TvShow>>> execute({int page = 1}) {
+    return repo.getAiringTodayTvShows(page: page);
+  }
 }

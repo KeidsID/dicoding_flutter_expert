@@ -147,19 +147,22 @@ class TvShowDetailContent extends StatelessWidget {
                         Text(tvShow.name, style: kHeading5),
                         ElevatedButton(
                           onPressed: () async {
-                            final prov =
-                                await Provider.of<TvShowDetailNotifier>(
-                              context,
-                              listen: false,
-                            );
-
                             if (isWatchlisted) {
-                              prov.deleteFromWatchlist(tvShow);
+                              await Provider.of<TvShowDetailNotifier>(
+                                context,
+                                listen: false,
+                              ).deleteFromWatchlist(tvShow);
                             } else {
-                              prov.addToWatchlist(tvShow);
+                              await Provider.of<TvShowDetailNotifier>(
+                                context,
+                                listen: false,
+                              ).addToWatchlist(tvShow);
                             }
 
-                            final msg = prov.watchlistMsg;
+                            final msg = await Provider.of<TvShowDetailNotifier>(
+                              context,
+                              listen: false,
+                            ).watchlistMsg;
                             final bool1 = msg ==
                                 TvShowDetailNotifier.addWatchlistSuccessMsg;
                             final bool2 = msg ==

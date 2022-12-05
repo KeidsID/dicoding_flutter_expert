@@ -9,7 +9,7 @@ import '../models/tv_show_models/tv_show_response.dart';
 import '../models/tv_show_models/tv_show_detail_model.dart';
 
 abstract class TvShowRemoteDataSource {
-  Future<List<TvShowModel>> getAiringTodayTvShows();
+  Future<List<TvShowModel>> getAiringTodayTvShows({int page = 1});
   Future<List<TvShowModel>> getPopularTvShows({int page = 1});
   Future<List<TvShowModel>> getTopRatedTvShows({int page = 1});
   Future<TvShowDetailModel> getTvShowDetail(int id);
@@ -23,9 +23,9 @@ class TvShowRemoteDataSourceImpl implements TvShowRemoteDataSource {
   final http.Client client;
 
   @override
-  Future<List<TvShowModel>> getAiringTodayTvShows() async {
+  Future<List<TvShowModel>> getAiringTodayTvShows({int page = 1}) async {
     final response = await client.get(
-      Uri.parse('$BASE_URL/tv/airing_today?$API_KEY'),
+      Uri.parse('$BASE_URL/tv/airing_today?$API_KEY&page=$page'),
     );
 
     if (response.statusCode == 200) {

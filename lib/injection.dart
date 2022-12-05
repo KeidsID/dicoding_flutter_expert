@@ -1,3 +1,5 @@
+import 'package:ditonton/presentation/provider/tv_show/airing_today_tv_shows_notifier.dart';
+
 import 'data/datasources/db/tv_show_db_helper.dart';
 import 'data/datasources/tv_show_local_data_source.dart';
 import 'data/datasources/tv_show_remote_data_source.dart';
@@ -92,6 +94,11 @@ void init() {
       getOnAirTvShows: locator(),
       getPopularTvShows: locator(),
       getTopRatedTvShows: locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => AiringTodayTvShowsNotifier(
+      getAiringTodayTvShows: locator(),
     ),
   );
   locator.registerFactory(

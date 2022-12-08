@@ -4,6 +4,8 @@
 
 # dicoding_flutter_expert
 
+[![Codemagic build status](https://api.codemagic.io/apps/6391f28a6945b09170773baa/6391f28a6945b09170773ba9/status_badge.svg)](https://codemagic.io/apps/6391f28a6945b09170773baa/6391f28a6945b09170773ba9/latest_build)
+
 This repo is a submission task from [dicoding.com Flutter Expert class][dicoding_class].
 
 Links:
@@ -11,7 +13,7 @@ Links:
 - [Project Starter (ditonton App)][project_starter]
 - [TMDb (The API used by the project)][tmdb]
 
-# TODO
+# TODO 1
 
 Mandatory Tasks:
 
@@ -28,7 +30,20 @@ Optional Tasks:
 - [ ] Widget test.
 - [ ] Integration test.
 
-# First Task
+# TODO 2
+
+Mandatory Tasks:
+
+- [x] Implementing Continuous Integration.
+- [ ] Migrate state management from provider to BLoC.
+- [ ] Implementing SSL Pinning.
+- [ ] Integration with Firebase Analytics & Crashlytics
+
+Optional Tasks:
+
+- [ ] Modularization (Movie & Tv Show)
+
+# First Tasks
 
 Add TV show feature on [ditonton App][project_starter].
 
@@ -138,3 +153,33 @@ The project must implement a clean architecture and divide the source code into 
 ### 1. Seasons and Episodes Detaiil Info Included.
 
 ### 2. Integration and Widget Test Included.
+
+# Second Tasks
+
+Implementing what we've learned (CI, BLoC, SSL Pinning, and Firebase Analytics & Crashlytics).
+
+## Task Requirements
+
+### 1. Implementing Continuous Integration
+
+- Auto run app tests every time there is latest push to the repo.
+- Display the build status badge in the GitHub repository readme file.
+- Free to use any CI Service for this task.
+
+### 2. Using BLoC Library
+
+- Migrate state management from provider to BLoC.
+
+### 3. Implementing SSL Pinning
+
+- Installing an SSL certificate on the application as an additional layer of security for accessing data from the API.
+
+### 4. Integration with Firebase Analytics & Crashlytics
+
+- Ensuring developers continue to receive feedback from users, especially regarding stability and error reports.
+
+## Optional Task
+
+### 1. Modularization
+
+- Dividing the application into modules for at least two features (Movie & Tv Show).

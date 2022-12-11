@@ -20,10 +20,8 @@ void main() {
   });
 
   group('TvShowRemoteDataSource', () {
-    final tvShowListJsonStr = readJson('dummy_data/tv_show/tv_show_list.json');
-    final tvShowDetailJsonStr = readJson(
-      'dummy_data/tv_show/tv_show_detail.json',
-    );
+    final tvShowListJsonStr = readJson('dummy_data/tv_show_list.json');
+    final tvShowDetailJsonStr = readJson('dummy_data/tv_show_detail.json');
     const tId = 1;
     group('.getAiringTodayTvShows() test:', () {
       test('Return List<TvShowModel> when the response code is 200', () async {

@@ -1,11 +1,9 @@
 import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:core/utils/json_reader.dart';
 import 'package:tv_show/data/models/tv_show_model.dart';
 import '../../dummy_data/tv_show_dummy_obj.dart';
-
-
+import '../../json_reader.dart';
 
 void main() {
   group('TvShowModel() test:', () {

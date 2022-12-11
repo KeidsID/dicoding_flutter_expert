@@ -41,7 +41,7 @@ Mandatory Tasks:
 
 Optional Tasks:
 
-- [ ] Modularization (Movie & Tv Show)
+- [x] Modularization (Movie & Tv Show)
 
 # First Tasks
 

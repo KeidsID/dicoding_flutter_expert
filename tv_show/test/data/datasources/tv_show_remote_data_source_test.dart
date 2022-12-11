@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:core/utils/json_reader.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
@@ -9,6 +8,7 @@ import 'package:core/core.dart';
 import 'package:tv_show/data/datasources/tv_show_remote_data_source.dart';
 import '../../dummy_data/tv_show_dummy_obj.dart';
 import '../../helpers/mock_helper.mocks.dart';
+import '../../json_reader.dart';
 
 void main() {
   late MockHttpClient mockClient;
@@ -63,7 +63,8 @@ void main() {
     group('.getPopularTvShows() test:', () {
       test('Return List<TvShowModel> when the response code is 200', () async {
         // arrange
-        when(mockClient.get(Uri.parse('$kApiBaseUrl/tv/popular?$kApiKey&page=1')))
+        when(mockClient
+                .get(Uri.parse('$kApiBaseUrl/tv/popular?$kApiKey&page=1')))
             .thenAnswer(
           (_) async => http.Response(
             tvShowListJsonStr,
@@ -83,7 +84,8 @@ void main() {
       test('Throw a ServerException when the response code is NOT 200',
           () async {
         // arrange
-        when(mockClient.get(Uri.parse('$kApiBaseUrl/tv/popular?$kApiKey&page=1')))
+        when(mockClient
+                .get(Uri.parse('$kApiBaseUrl/tv/popular?$kApiKey&page=1')))
             .thenAnswer((_) async => http.Response('Not Found', 404));
 
         // act
@@ -97,7 +99,8 @@ void main() {
       test('Return List<TvShowModel> when the response code is 200', () async {
         // arrange
         when(
-          mockClient.get(Uri.parse('$kApiBaseUrl/tv/top_rated?$kApiKey&page=1')),
+          mockClient
+              .get(Uri.parse('$kApiBaseUrl/tv/top_rated?$kApiKey&page=1')),
         ).thenAnswer(
           (_) async => http.Response(
             tvShowListJsonStr,
@@ -118,7 +121,8 @@ void main() {
           () async {
         // arrange
         when(
-          mockClient.get(Uri.parse('$kApiBaseUrl/tv/top_rated?$kApiKey&page=1')),
+          mockClient
+              .get(Uri.parse('$kApiBaseUrl/tv/top_rated?$kApiKey&page=1')),
         ).thenAnswer((_) async => http.Response('Not Found', 404));
 
         // act

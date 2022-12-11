@@ -1,16 +1,16 @@
-[dicoding_class]: https://www.dicoding.com/academies/199
-[project_starter]: https://github.com/dicodingacademy/a199-flutter-expert-project
+[dicoding-class]: https://www.dicoding.com/academies/199
+[project-starter]: https://github.com/dicodingacademy/a199-flutter-expert-project
 [tmdb]: https://developers.themoviedb.org/3
 
 # dicoding_flutter_expert
 
-[![Codemagic build status](https://api.codemagic.io/apps/6391f28a6945b09170773baa/6391f28a6945b09170773ba9/status_badge.svg)](https://codemagic.io/apps/6391f28a6945b09170773baa/6391f28a6945b09170773ba9/latest_build)
+[![Codemagic Build Status](https://api.codemagic.io/apps/6391f28a6945b09170773baa/default-workflow/status_badge.svg)](#dicoding_flutter_expert)
 
-This repo is a submission task from [dicoding.com Flutter Expert class][dicoding_class].
+This repo is a submission task from [dicoding.com Flutter Expert class][dicoding-class].
 
 Links:
 
-- [Project Starter (ditonton App)][project_starter]
+- [Project Starter (ditonton App)][project-starter]
 - [TMDb (The API used by the project)][tmdb]
 
 # TODO 1
@@ -45,7 +45,7 @@ Optional Tasks:
 
 # First Tasks
 
-Add TV show feature on [ditonton App][project_starter].
+Add TV show feature on [ditonton App][project-starter].
 
 ## Task Requirements
 

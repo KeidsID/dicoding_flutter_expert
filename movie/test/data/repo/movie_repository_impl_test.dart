@@ -13,7 +13,7 @@ import 'package:movie/data/models/movie_model.dart';
 import 'package:movie/data/repo/movie_repository_impl.dart';
 import 'package:movie/domain/entities/movie.dart';
 
-import '../../dummy/dummy_objects.dart';
+import '../../dummy_data/dummy_objects.dart';
 import '../../helper/mock_helper.mocks.dart';
 
 void main() {

@@ -6,7 +6,7 @@ import 'package:core/common/failure.dart';
 import 'package:core/common/state_enum.dart';
 import 'package:movie/domain/entities/movie.dart';
 
-import '../../dummy/dummy_objects.dart';
+import '../../dummy_data/dummy_objects.dart';
 import '../../helper/mock_usecases.mocks.dart';
 import 'package:movie/presentation/provider/movie_detail_notifier.dart';
 

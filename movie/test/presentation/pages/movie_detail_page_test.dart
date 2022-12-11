@@ -8,7 +8,7 @@ import 'package:movie/domain/entities/movie.dart';
 import 'package:movie/presentation/pages/movie_detail_page.dart';
 import 'package:movie/presentation/provider/movie_detail_notifier.dart';
 
-import '../../dummy/dummy_objects.dart';
+import '../../dummy_data/dummy_objects.dart';
 import '../../helper/mock_notifier.mocks.dart';
 
 void main() {

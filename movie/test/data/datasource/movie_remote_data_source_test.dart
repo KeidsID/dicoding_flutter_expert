@@ -5,12 +5,11 @@ import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
 
 import 'package:core/common/exception.dart';
+import 'package:core/common/utils.dart';
 import 'package:movie/data/data_source/movie_remote_data_source.dart';
 import 'package:movie/data/models/movie_detail_model.dart';
 import 'package:movie/data/models/movie_response.dart';
 import '../../helper/mock_helper.mocks.dart';
-import '../../json_reader.dart';
-
 void main() {
   const apiKey = 'api_key=2174d146bb9c0eab47529b2e77d6b526';
   const baseUrl = 'https://api.themoviedb.org/3';

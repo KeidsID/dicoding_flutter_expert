@@ -5,10 +5,10 @@ import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
 
 import 'package:core/core.dart';
+import 'package:core/common/utils.dart';
 import 'package:tv_show/data/datasources/tv_show_remote_data_source.dart';
 import '../../dummy_data/tv_show_dummy_obj.dart';
 import '../../helpers/mock_helper.mocks.dart';
-import '../../json_reader.dart';
 
 void main() {
   late MockHttpClient mockClient;

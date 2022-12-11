@@ -5,7 +5,7 @@ import 'package:mockito/mockito.dart';
 import 'package:core/core.dart';
 import 'package:movie/presentation/provider/watchlist_movie_notifier.dart';
 
-import '../../dummy/dummy_objects.dart';
+import '../../dummy_data/dummy_objects.dart';
 import '../../helper/mock_usecases.mocks.dart';
 
 void main() {

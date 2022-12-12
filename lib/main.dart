@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
@@ -25,8 +26,8 @@ class MyApp extends StatelessWidget {
       ChangeNotifierProvider(
         create: (_) => di.locator<MovieDetailNotifier>(),
       ),
-      ChangeNotifierProvider(
-        create: (_) => di.locator<MovieSearchNotifier>(),
+      BlocProvider(
+        create: (_) => di.locator<MovieSearchBloc>(),
       ),
       ChangeNotifierProvider(
         create: (_) => di.locator<TopRatedMoviesNotifier>(),

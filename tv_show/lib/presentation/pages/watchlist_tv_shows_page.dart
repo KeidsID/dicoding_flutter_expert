@@ -53,7 +53,7 @@ class _WatchlistTvShowsPageState extends State<WatchlistTvShowsPage>
             } else if (data.state == RequestState.loaded) {
               if (data.results.isEmpty) {
                 return const Center(
-                  child: Text('No watchlist movie yet. Try add some.'),
+                  child: Text('No watchlist tv show yet. Try add some.'),
                 );
               }
 

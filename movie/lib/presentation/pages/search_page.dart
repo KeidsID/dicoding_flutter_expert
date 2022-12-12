@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 import 'package:core/common/state_enum.dart';
 import 'package:core/styles/app_theme.dart';
 
+import '../bloc/movie_search/movie_search_bloc.dart';
 import '../widgets/movie_card.dart';
 import '../provider/movie_search_notifier.dart';
 
@@ -44,7 +46,7 @@ class _SearchPageState extends State<SearchPage> {
           children: [
             TextField(
               controller: _searchCtrler,
-              onSubmitted: (query) {
+              onChanged: (query) {
                 if (query == '') {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('No Input')),
@@ -53,8 +55,7 @@ class _SearchPageState extends State<SearchPage> {
                   return;
                 }
 
-                Provider.of<MovieSearchNotifier>(context, listen: false)
-                    .fetchMovieSearch(query);
+                context.read<MovieSearchBloc>().add(OnQueryChanged(query));
               },
               decoration: const InputDecoration(
                 hintText: 'Search title',
@@ -68,36 +69,19 @@ class _SearchPageState extends State<SearchPage> {
               'Search Result',
               style: kHeading6,
             ),
-            Consumer<MovieSearchNotifier>(
-              builder: (context, data, child) {
-                if (data.state == RequestState.loading) {
+            BlocBuilder<MovieSearchBloc, MovieSearchState>(
+              builder: (context, state) {
+                if (state is SearchLoading) {
                   return const Expanded(
                     child: Center(
                       child: CircularProgressIndicator(),
                     ),
                   );
-                } else if (data.state == RequestState.loaded) {
-                  final results = data.searchResult;
+                }
 
-                  if (results.isEmpty) {
-                    return const Expanded(
-                      child: Center(
-                        child: Text('No result for your search. sorry :('),
-                      ),
-                    );
-                  }
+                if (state is! SearchLoaded) {
+                  if (state is SearchEmpty) return const SizedBox();
 
-                  return Expanded(
-                    child: ListView.builder(
-                      padding: const EdgeInsets.all(8),
-                      itemBuilder: (context, index) {
-                        final movie = data.searchResult[index];
-                        return MovieCard(movie: movie);
-                      },
-                      itemCount: results.length,
-                    ),
-                  );
-                } else {
                   return Expanded(
                     child: Center(
                       child: Column(
@@ -106,7 +90,9 @@ class _SearchPageState extends State<SearchPage> {
                           const Text('No Internet Access'),
                           ElevatedButton(
                             onPressed: () {
-                              if (_searchCtrler.text == '') {
+                              final query = _searchCtrler.text;
+
+                              if (query == '') {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(content: Text('No Input')),
                                 );
@@ -114,7 +100,9 @@ class _SearchPageState extends State<SearchPage> {
                                 return;
                               }
 
-                              data.fetchMovieSearch(_searchCtrler.text);
+                              context
+                                  .read<MovieSearchBloc>()
+                                  .add(OnQueryChanged(query));
                             },
                             child: const Text('Refresh'),
                           ),
@@ -123,6 +111,27 @@ class _SearchPageState extends State<SearchPage> {
                     ),
                   );
                 }
+
+                final results = state.results;
+
+                if (results.isEmpty) {
+                  return const Expanded(
+                    child: Center(
+                      child: Text('No result for your search. sorry :('),
+                    ),
+                  );
+                }
+
+                return Expanded(
+                  child: ListView.builder(
+                    padding: const EdgeInsets.all(8),
+                    itemBuilder: (context, index) {
+                      final movie = results[index];
+                      return MovieCard(movie: movie);
+                    },
+                    itemCount: results.length,
+                  ),
+                );
               },
             ),
           ],

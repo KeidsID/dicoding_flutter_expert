@@ -18,7 +18,7 @@ import 'package:tv_show/tv_show.dart';
 final locator = GetIt.instance;
 
 void init() {
-  // provider
+  // State Manager
   locator.registerFactory(
     () => MovieListNotifier(
       getNowPlayingMovies: locator(),
@@ -35,11 +35,7 @@ void init() {
       removeWatchlist: locator(),
     ),
   );
-  locator.registerFactory(
-    () => MovieSearchNotifier(
-      searchMovies: locator(),
-    ),
-  );
+  locator.registerFactory(() => MovieSearchBloc(locator()));
   locator.registerFactory(
     () => PopularMoviesNotifier(
       locator(),

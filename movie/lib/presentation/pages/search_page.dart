@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 
-import 'package:core/common/state_enum.dart';
 import 'package:core/styles/app_theme.dart';
 
 import '../bloc/movie_search/movie_search_bloc.dart';
 import '../widgets/movie_card.dart';
-import '../provider/movie_search_notifier.dart';
 
 class SearchPage extends StatefulWidget {
   static const routeName = '/movies_search';

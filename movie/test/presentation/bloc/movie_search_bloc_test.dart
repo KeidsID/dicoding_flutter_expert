@@ -9,16 +9,16 @@ import 'package:movie/presentation/bloc/movie_search/movie_search_bloc.dart';
 import '../../helper/mock_usecases.mocks.dart';
 
 void main() {
-  late MovieSearchBloc bloc;
+  late MovieSearchBloc testBloc;
   late MockSearchMovies mockUsecase;
 
   setUp(() {
     mockUsecase = MockSearchMovies();
-    bloc = MovieSearchBloc(mockUsecase);
+    testBloc = MovieSearchBloc(mockUsecase);
   });
 
   test('initial state should be empty', () {
-    expect(bloc.state, SearchEmpty());
+    expect(testBloc.state, SearchEmpty());
   });
 
   final tMovieModel = Movie(
@@ -45,7 +45,7 @@ void main() {
     build: () {
       when(mockUsecase.execute(tQuery))
           .thenAnswer((_) async => Right(tMovieList));
-      return bloc;
+      return testBloc;
     },
     act: (bloc) => bloc.add(const OnQueryChanged(tQuery)),
     wait: const Duration(milliseconds: 500),
@@ -63,7 +63,7 @@ void main() {
   build: () {
     when(mockUsecase.execute(tQuery))
         .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
-    return bloc;
+    return testBloc;
   },
   act: (bloc) => bloc.add(const OnQueryChanged(tQuery)),
   wait: const Duration(milliseconds: 500),

@@ -20,8 +20,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var movieProvs = <SingleChildWidget>[
-      ChangeNotifierProvider(
-        create: (_) => di.locator<MovieListNotifier>(),
+      BlocProvider(
+        create: (_) => di.locator<MovieListBloc>(),
       ),
       ChangeNotifierProvider(
         create: (_) => di.locator<MovieDetailNotifier>(),

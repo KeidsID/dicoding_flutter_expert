@@ -4,7 +4,7 @@ import 'package:movie/data/models/movie_table.dart';
 import 'package:movie/domain/entities/movie.dart';
 import 'package:movie/domain/entities/movie_detail.dart';
 
-final testMovie = Movie(
+final dummyMovie = Movie(
   adult: false,
   backdropPath: '/muth4OYamXf41G2evdrLEg8d3om.jpg',
   genreIds: const [14, 28],
@@ -21,9 +21,9 @@ final testMovie = Movie(
   voteCount: 13507,
 );
 
-final testMovieList = [testMovie];
+final dummyMovieList = [dummyMovie];
 
-const testMovieDetail = MovieDetail(
+const dummyMovieDetail = MovieDetail(
   adult: false,
   backdropPath: 'backdropPath',
   genres: [Genre(id: 1, name: 'Action')],
@@ -38,21 +38,21 @@ const testMovieDetail = MovieDetail(
   voteCount: 1,
 );
 
-final testWatchlistMovie = Movie.watchlist(
+final dummyWatchlistMovie = Movie.watchlist(
   id: 1,
   title: 'title',
   posterPath: 'posterPath',
   overview: 'overview',
 );
 
-const testMovieTable = MovieTable(
+const dummyMovieTable = MovieTable(
   id: 1,
   title: 'title',
   posterPath: 'posterPath',
   overview: 'overview',
 );
 
-final testMovieMap = {
+final dummyMovieMap = {
   'id': 1,
   'overview': 'overview',
   'posterPath': 'posterPath',

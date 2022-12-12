@@ -19,9 +19,9 @@ void main() {
     test('should return success message when insert to database is success',
         () async {
       // arrange
-      when(dbHelper.insertWatchlist(testMovieTable)).thenAnswer((_) async => 1);
+      when(dbHelper.insertWatchlist(dummyMovieTable)).thenAnswer((_) async => 1);
       // act
-      final result = await dataSource.insertWatchlist(testMovieTable);
+      final result = await dataSource.insertWatchlist(dummyMovieTable);
       // assert
       expect(result, 'Added to Watchlist');
     });
@@ -29,9 +29,9 @@ void main() {
     test('should throw DatabaseException when insert to database is failed',
         () async {
       // arrange
-      when(dbHelper.insertWatchlist(testMovieTable)).thenThrow(Exception());
+      when(dbHelper.insertWatchlist(dummyMovieTable)).thenThrow(Exception());
       // act
-      final call = dataSource.insertWatchlist(testMovieTable);
+      final call = dataSource.insertWatchlist(dummyMovieTable);
       // assert
       expect(() => call, throwsA(isA<DatabaseException>()));
     });
@@ -41,9 +41,9 @@ void main() {
     test('should return success message when remove from database is success',
         () async {
       // arrange
-      when(dbHelper.removeWatchlist(testMovieTable)).thenAnswer((_) async => 1);
+      when(dbHelper.removeWatchlist(dummyMovieTable)).thenAnswer((_) async => 1);
       // act
-      final result = await dataSource.removeWatchlist(testMovieTable);
+      final result = await dataSource.removeWatchlist(dummyMovieTable);
       // assert
       expect(result, 'Removed from Watchlist');
     });
@@ -51,9 +51,9 @@ void main() {
     test('should throw DatabaseException when remove from database is failed',
         () async {
       // arrange
-      when(dbHelper.removeWatchlist(testMovieTable)).thenThrow(Exception());
+      when(dbHelper.removeWatchlist(dummyMovieTable)).thenThrow(Exception());
       // act
-      final call = dataSource.removeWatchlist(testMovieTable);
+      final call = dataSource.removeWatchlist(dummyMovieTable);
       // assert
       expect(() => call, throwsA(isA<DatabaseException>()));
     });
@@ -64,11 +64,11 @@ void main() {
 
     test('should return Movie Detail Table when data is found', () async {
       // arrange
-      when(dbHelper.getMovieById(tId)).thenAnswer((_) async => testMovieMap);
+      when(dbHelper.getMovieById(tId)).thenAnswer((_) async => dummyMovieMap);
       // act
       final result = await dataSource.getMovieById(tId);
       // assert
-      expect(result, testMovieTable);
+      expect(result, dummyMovieTable);
     });
 
     test('should return null when data is not found', () async {
@@ -85,11 +85,11 @@ void main() {
     test('should return list of MovieTable from database', () async {
       // arrange
       when(dbHelper.getWatchlistMovies())
-          .thenAnswer((_) async => [testMovieMap]);
+          .thenAnswer((_) async => [dummyMovieMap]);
       // act
       final result = await dataSource.getWatchlistMovies();
       // assert
-      expect(result, [testMovieTable]);
+      expect(result, [dummyMovieTable]);
     });
   });
 }

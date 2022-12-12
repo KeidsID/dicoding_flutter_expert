@@ -10,6 +10,8 @@ part 'movie_search_event.dart';
 part 'movie_search_state.dart';
 
 class MovieSearchBloc extends Bloc<MovieSearchEvent, MovieSearchState> {
+  final SearchMovies searchMovie;
+
   MovieSearchBloc(this.searchMovie) : super(SearchEmpty()) {
     on<OnQueryChanged>(
       (ev, emit) async {
@@ -30,6 +32,4 @@ class MovieSearchBloc extends Bloc<MovieSearchEvent, MovieSearchState> {
       transformer: blocDebounceTime(const Duration(milliseconds: 500)),
     );
   }
-
-  final SearchMovies searchMovie;
 }

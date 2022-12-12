@@ -20,7 +20,7 @@ final locator = GetIt.instance;
 void init() {
   // State Manager
   locator.registerFactory(
-    () => MovieListNotifier(
+    () => MovieListBloc(
       getNowPlayingMovies: locator(),
       getPopularMovies: locator(),
       getTopRatedMovies: locator(),

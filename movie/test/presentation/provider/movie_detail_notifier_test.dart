@@ -58,7 +58,7 @@ void main() {
 
   void arrangeUsecase() {
     when(mockGetMovieDetail.execute(tId))
-        .thenAnswer((_) async => const Right(testMovieDetail));
+        .thenAnswer((_) async => const Right(dummyMovieDetail));
     when(mockGetMovieRecommendations.execute(tId))
         .thenAnswer((_) async => Right(tMovies));
   }
@@ -91,7 +91,7 @@ void main() {
       await provider.fetchMovieDetail(tId);
       // assert
       expect(provider.movieState, RequestState.loaded);
-      expect(provider.movie, testMovieDetail);
+      expect(provider.movie, dummyMovieDetail);
       expect(listenerCallCount, 3);
     });
 
@@ -132,7 +132,7 @@ void main() {
     test('should update error message when request in successful', () async {
       // arrange
       when(mockGetMovieDetail.execute(tId))
-          .thenAnswer((_) async => const Right(testMovieDetail));
+          .thenAnswer((_) async => const Right(dummyMovieDetail));
       when(mockGetMovieRecommendations.execute(tId))
           .thenAnswer((_) async => const Left(ServerFailure('Failed')));
       // act
@@ -155,38 +155,38 @@ void main() {
 
     test('should execute save watchlist when function called', () async {
       // arrange
-      when(mockSaveWatchlist.execute(testMovieDetail))
+      when(mockSaveWatchlist.execute(dummyMovieDetail))
           .thenAnswer((_) async => const Right('Success'));
-      when(mockGetWatchlistStatus.execute(testMovieDetail.id))
+      when(mockGetWatchlistStatus.execute(dummyMovieDetail.id))
           .thenAnswer((_) async => true);
       // act
-      await provider.addWatchlist(testMovieDetail);
+      await provider.addWatchlist(dummyMovieDetail);
       // assert
-      verify(mockSaveWatchlist.execute(testMovieDetail));
+      verify(mockSaveWatchlist.execute(dummyMovieDetail));
     });
 
     test('should execute remove watchlist when function called', () async {
       // arrange
-      when(mockRemoveWatchlist.execute(testMovieDetail))
+      when(mockRemoveWatchlist.execute(dummyMovieDetail))
           .thenAnswer((_) async => const Right('Removed'));
-      when(mockGetWatchlistStatus.execute(testMovieDetail.id))
+      when(mockGetWatchlistStatus.execute(dummyMovieDetail.id))
           .thenAnswer((_) async => false);
       // act
-      await provider.removeFromWatchlist(testMovieDetail);
+      await provider.removeFromWatchlist(dummyMovieDetail);
       // assert
-      verify(mockRemoveWatchlist.execute(testMovieDetail));
+      verify(mockRemoveWatchlist.execute(dummyMovieDetail));
     });
 
     test('should update watchlist status when add watchlist success', () async {
       // arrange
-      when(mockSaveWatchlist.execute(testMovieDetail))
+      when(mockSaveWatchlist.execute(dummyMovieDetail))
           .thenAnswer((_) async => const Right('Added to Watchlist'));
-      when(mockGetWatchlistStatus.execute(testMovieDetail.id))
+      when(mockGetWatchlistStatus.execute(dummyMovieDetail.id))
           .thenAnswer((_) async => true);
       // act
-      await provider.addWatchlist(testMovieDetail);
+      await provider.addWatchlist(dummyMovieDetail);
       // assert
-      verify(mockGetWatchlistStatus.execute(testMovieDetail.id));
+      verify(mockGetWatchlistStatus.execute(dummyMovieDetail.id));
       expect(provider.isAddedToWatchlist, true);
       expect(provider.watchlistMessage, 'Added to Watchlist');
       expect(listenerCallCount, 1);
@@ -194,12 +194,12 @@ void main() {
 
     test('should update watchlist message when add watchlist failed', () async {
       // arrange
-      when(mockSaveWatchlist.execute(testMovieDetail))
+      when(mockSaveWatchlist.execute(dummyMovieDetail))
           .thenAnswer((_) async => const Left(DatabaseFailure('Failed')));
-      when(mockGetWatchlistStatus.execute(testMovieDetail.id))
+      when(mockGetWatchlistStatus.execute(dummyMovieDetail.id))
           .thenAnswer((_) async => false);
       // act
-      await provider.addWatchlist(testMovieDetail);
+      await provider.addWatchlist(dummyMovieDetail);
       // assert
       expect(provider.watchlistMessage, 'Failed');
       expect(listenerCallCount, 1);

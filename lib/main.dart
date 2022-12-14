@@ -29,11 +29,11 @@ class MyApp extends StatelessWidget {
       BlocProvider(
         create: (_) => di.locator<MovieSearchBloc>(),
       ),
-      ChangeNotifierProvider(
-        create: (_) => di.locator<TopRatedMoviesNotifier>(),
+      BlocProvider(
+        create: (_) => di.locator<TopRatedMoviesBloc>(),
       ),
-      ChangeNotifierProvider(
-        create: (_) => di.locator<PopularMoviesNotifier>(),
+      BlocProvider(
+        create: (_) => di.locator<PopularMoviesBloc>(),
       ),
       ChangeNotifierProvider(
         create: (_) => di.locator<WatchlistMovieNotifier>(),

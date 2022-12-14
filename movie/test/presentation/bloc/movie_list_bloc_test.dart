@@ -29,7 +29,7 @@ void main() {
   const serverFailMsg = 'Server Failure';
 
   group('MovieListBloc', () {
-    test('test: The state properties has been init\n', () {
+    test('test: The BLoC State properties has been init\n', () {
       expect(testBloc.state.npState, RequestState.empty);
       expect(testBloc.state.popState, RequestState.empty);
       expect(testBloc.state.trState, RequestState.empty);
@@ -39,7 +39,7 @@ void main() {
       expect(testBloc.state.msg, '');
     });
 
-    group('event (OnFetchingNowPlayingMovies) test:', () {
+    group('Event (OnFetchingNowPlayingMovies) test:', () {
       blocTest<MovieListBloc, MovieListState>(
         'On loaded npState conditions',
         build: () {
@@ -79,7 +79,7 @@ void main() {
       );
     });
 
-    group('event (OnFetchingPopularMovies) test:', () {
+    group('Event (OnFetchingPopularMovies) test:', () {
       blocTest<MovieListBloc, MovieListState>(
         'On loaded popState conditions',
         build: () {
@@ -119,7 +119,7 @@ void main() {
       );
     });
 
-    group('event (OnFetchingTopRatedMovies) test:', () {
+    group('Event (OnFetchingTopRatedMovies) test:', () {
       blocTest<MovieListBloc, MovieListState>(
         'On loaded trState conditions',
         build: () {

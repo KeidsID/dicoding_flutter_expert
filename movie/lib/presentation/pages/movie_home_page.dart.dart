@@ -26,9 +26,11 @@ class _MovieHomePageState extends State<MovieHomePage> {
   void initState() {
     super.initState();
 
-    context.read<MovieListBloc>().add(OnFetchingNowPlayingMovies());
-    context.read<MovieListBloc>().add(OnFetchingPopularMovies());
-    context.read<MovieListBloc>().add(OnFetchingTopRatedMovies());
+    Future.microtask(() {
+      context.read<MovieListBloc>().add(const OnFetchingNowPlayingMovies());
+      context.read<MovieListBloc>().add(const OnFetchingPopularMovies());
+      context.read<MovieListBloc>().add(const OnFetchingTopRatedMovies());
+    });
   }
 
   @override
@@ -116,7 +118,7 @@ class _MovieHomePageState extends State<MovieHomePage> {
                     return _listError(
                       msg: state.msg,
                       onPressed: () {
-                        bloc.add(OnFetchingNowPlayingMovies());
+                        bloc.add(const OnFetchingNowPlayingMovies());
                       },
                     );
                   }
@@ -146,7 +148,7 @@ class _MovieHomePageState extends State<MovieHomePage> {
                     return _listError(
                       msg: state.msg,
                       onPressed: () {
-                        bloc.add(OnFetchingPopularMovies());
+                        bloc.add(const OnFetchingPopularMovies());
                       },
                     );
                   }
@@ -176,7 +178,7 @@ class _MovieHomePageState extends State<MovieHomePage> {
                     return _listError(
                       msg: state.msg,
                       onPressed: () {
-                        bloc.add(OnFetchingTopRatedMovies());
+                        bloc.add(const OnFetchingTopRatedMovies());
                       },
                     );
                   }

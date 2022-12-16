@@ -35,6 +35,8 @@ class _MovieHomePageState extends State<MovieHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
       drawer: Drawer(
         child: Column(
@@ -106,16 +108,16 @@ class _MovieHomePageState extends State<MovieHomePage> {
                   final bloc = context.read<MovieListBloc>();
 
                   if (state.npState == RequestState.loading) {
-                    return const SizedBox(
+                    return SizedBox(
                       height: 200,
-                      child: Expanded(
-                        child: Center(child: CircularProgressIndicator()),
-                      ),
+                      width: screenSize.width,
+                      child: const Center(child: CircularProgressIndicator()),
                     );
                   }
 
                   if (state.npState != RequestState.loaded) {
                     return _listError(
+                      width: screenSize.width,
                       msg: state.msg,
                       onPressed: () {
                         bloc.add(const OnFetchingNowPlayingMovies());
@@ -136,16 +138,16 @@ class _MovieHomePageState extends State<MovieHomePage> {
                   final bloc = context.read<MovieListBloc>();
 
                   if (state.popState == RequestState.loading) {
-                    return const SizedBox(
+                    return SizedBox(
                       height: 200,
-                      child: Expanded(
-                        child: Center(child: CircularProgressIndicator()),
-                      ),
+                      width: screenSize.width,
+                      child: const Center(child: CircularProgressIndicator()),
                     );
                   }
 
                   if (state.popState != RequestState.loaded) {
                     return _listError(
+                      width: screenSize.width,
                       msg: state.msg,
                       onPressed: () {
                         bloc.add(const OnFetchingPopularMovies());
@@ -166,16 +168,16 @@ class _MovieHomePageState extends State<MovieHomePage> {
                   final bloc = context.read<MovieListBloc>();
 
                   if (state.trState == RequestState.loading) {
-                    return const SizedBox(
+                    return SizedBox(
                       height: 200,
-                      child: Expanded(
-                        child: Center(child: CircularProgressIndicator()),
-                      ),
+                      width: screenSize.width,
+                      child: const Center(child: CircularProgressIndicator()),
                     );
                   }
 
                   if (state.trState != RequestState.loaded) {
                     return _listError(
+                      width: screenSize.width,
                       msg: state.msg,
                       onPressed: () {
                         bloc.add(const OnFetchingTopRatedMovies());
@@ -214,21 +216,24 @@ class _MovieHomePageState extends State<MovieHomePage> {
     );
   }
 
-  Widget _listError({required String msg, required void Function() onPressed}) {
+  Widget _listError({
+    required double width,
+    required String msg,
+    required void Function() onPressed,
+  }) {
     return SizedBox(
       height: 200,
-      child: Expanded(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(msg),
-              ElevatedButton(
-                onPressed: onPressed,
-                child: const Text('Refresh'),
-              ),
-            ],
-          ),
+      width: width,
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(msg),
+            ElevatedButton(
+              onPressed: onPressed,
+              child: const Text('Refresh'),
+            ),
+          ],
         ),
       ),
     );

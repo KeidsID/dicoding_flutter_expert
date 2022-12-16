@@ -23,8 +23,8 @@ class MyApp extends StatelessWidget {
       BlocProvider(
         create: (_) => di.locator<MovieListBloc>(),
       ),
-      ChangeNotifierProvider(
-        create: (_) => di.locator<MovieDetailNotifier>(),
+      BlocProvider(
+        create: (_) => di.locator<MovieDetailBloc>(),
       ),
       BlocProvider(
         create: (_) => di.locator<MovieSearchBloc>(),

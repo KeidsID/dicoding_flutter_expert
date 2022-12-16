@@ -1,12 +1,12 @@
 import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
 
-import 'package:movie/movie.dart';
 import 'package:movie/data/data_source/db/movie_db_helper.dart';
 import 'package:movie/data/data_source/movie_local_data_source.dart';
 import 'package:movie/data/data_source/movie_remote_data_source.dart';
 import 'package:movie/data/repo/movie_repository_impl.dart';
 import 'package:movie/domain/repo/movie_repository.dart';
+import 'package:movie/movie.dart';
 
 import 'package:tv_show/data/datasources/db/tv_show_db_helper.dart';
 import 'package:tv_show/data/datasources/tv_show_local_data_source.dart';
@@ -27,7 +27,7 @@ void init() {
     ),
   );
   locator.registerFactory(
-    () => MovieDetailNotifier(
+    () => MovieDetailBloc(
       getMovieDetail: locator(),
       getMovieRecommendations: locator(),
       getWatchListStatus: locator(),

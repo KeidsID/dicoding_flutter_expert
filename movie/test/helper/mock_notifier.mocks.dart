@@ -95,9 +95,9 @@ class _FakeMovieDetail_5 extends _i1.SmartFake implements _i7.MovieDetail {
 /// A class which mocks [MovieDetailNotifier].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockMovieDetailNotifier extends _i1.Mock
+class MockBloc extends _i1.Mock
     implements _i8.MovieDetailNotifier {
-  MockMovieDetailNotifier() {
+  MockBloc() {
     _i1.throwOnMissingStub(this);
   }
 

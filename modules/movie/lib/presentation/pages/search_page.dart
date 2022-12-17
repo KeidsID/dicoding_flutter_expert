@@ -1,7 +1,6 @@
+import 'package:core/styles/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:core/styles/app_theme.dart';
 
 import '../bloc/movie_search/movie_search_bloc.dart';
 import '../widgets/movie_card.dart';
@@ -31,11 +30,15 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    context.read<MovieSearchBloc>().add(const OnDidChangeDep());
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Search'),
-      ),
+      appBar: AppBar(title: const Text('Search')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -45,10 +48,7 @@ class _SearchPageState extends State<SearchPage> {
               controller: _searchCtrler,
               onChanged: (query) {
                 if (query == '') {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('No Input')),
-                  );
-
+                  context.read<MovieSearchBloc>().add(const OnDidChangeDep());
                   return;
                 }
 
@@ -77,7 +77,7 @@ class _SearchPageState extends State<SearchPage> {
                 }
 
                 if (state is! SearchLoaded) {
-                  if (state is SearchEmpty) return const SizedBox();
+                  if (state is! SearchError) return const SizedBox();
 
                   return Expanded(
                     child: Center(

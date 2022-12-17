@@ -39,18 +39,19 @@ class MyApp extends StatelessWidget {
         create: (_) => di.locator<WatchlistMovieBloc>(),
       ),
     ];
+    
     var tvShowProvs = <SingleChildWidget>[
       ChangeNotifierProvider(
         create: (_) => di.locator<TvShowListNotifier>(),
       ),
-      ChangeNotifierProvider(
-        create: (_) => di.locator<AiringTodayTvShowsNotifier>(),
+      BlocProvider(
+        create: (_) => di.locator<AiringTodayTvShowsBloc>(),
       ),
-      ChangeNotifierProvider(
-        create: (_) => di.locator<PopularTvShowsNotifier>(),
+      BlocProvider(
+        create: (_) => di.locator<PopularTvShowsBloc>(),
       ),
-      ChangeNotifierProvider(
-        create: (_) => di.locator<TopRatedTvShowsNotifier>(),
+      BlocProvider(
+        create: (_) => di.locator<TopRatedTvShowsBloc>(),
       ),
       ChangeNotifierProvider(
         create: (_) => di.locator<TvShowDetailNotifier>(),

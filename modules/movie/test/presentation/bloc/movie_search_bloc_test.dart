@@ -18,7 +18,7 @@ void main() {
   });
 
   test('initial state should be empty', () {
-    expect(testBloc.state, SearchEmpty());
+    expect(testBloc.state, const InitState());
   });
 
   final tMovieModel = Movie(
@@ -49,30 +49,33 @@ void main() {
     },
     act: (bloc) => bloc.add(const OnQueryChanged(tQuery)),
     wait: const Duration(milliseconds: 500),
+    verify: (_) => verify(mockUsecase.execute(tQuery)),
     expect: () => [
-      SearchLoading(),
+      const SearchLoading(),
       SearchLoaded(tMovieList),
     ],
-    verify: (bloc) {
-      verify(mockUsecase.execute(tQuery));
-    },
   );
 
   blocTest<MovieSearchBloc, MovieSearchState>(
-  'Should emit [Loading, Error] when get search is unsuccessful',
-  build: () {
-    when(mockUsecase.execute(tQuery))
-        .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
-    return testBloc;
-  },
-  act: (bloc) => bloc.add(const OnQueryChanged(tQuery)),
-  wait: const Duration(milliseconds: 500),
-  expect: () => [
-    SearchLoading(),
-    const SearchError('Server Failure'),
-  ],
-  verify: (bloc) {
-    verify(mockUsecase.execute(tQuery));
-  },
-);
+    'Should emit [Loading, Error] when get search is unsuccessful',
+    build: () {
+      when(mockUsecase.execute(tQuery))
+          .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
+      return testBloc;
+    },
+    act: (bloc) => bloc.add(const OnQueryChanged(tQuery)),
+    wait: const Duration(milliseconds: 500),
+    verify: (_) => verify(mockUsecase.execute(tQuery)),
+    expect: () => [
+      const SearchLoading(),
+      const SearchError('Server Failure'),
+    ],
+  );
+
+  blocTest<MovieSearchBloc, MovieSearchState>(
+    'emits [StateInit] when OnDidChangeDep is added.',
+    build: () => testBloc,
+    act: (bloc) => bloc.add(const OnDidChangeDep()),
+    expect: () => const [InitState()],
+  );
 }

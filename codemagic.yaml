@@ -35,9 +35,12 @@ workflows:
       - |
         # set up local properties
         echo "flutter.sdk=$HOME/programs/flutter" > "$FCI_BUILD_DIR/android/local.properties"
-      - flutter packages pub get
-      # test args
-      - cd modules/movie && flutter test && cd ../tv_show && flutter test
+      - name: Get Flutter packages
+        script: |
+          flutter packages pub get
+      - name: Testing Modules
+        script: |
+          cd modules/movie && flutter test && cd ../tv_show && flutter test
       - flutter build apk --release
       - find . -name "Podfile" -execdir pod install \;
       - flutter build ios --release --no-codesign

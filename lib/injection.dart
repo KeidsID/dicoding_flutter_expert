@@ -48,21 +48,6 @@ void init() {
     ),
   );
   locator.registerFactory(
-    () => AiringTodayTvShowsNotifier(
-      getAiringTodayTvShows: locator(),
-    ),
-  );
-  locator.registerFactory(
-    () => PopularTvShowsNotifier(
-      getPopularTvShows: locator(),
-    ),
-  );
-  locator.registerFactory(
-    () => TopRatedTvShowsNotifier(
-      getTopRatedTvShows: locator(),
-    ),
-  );
-  locator.registerFactory(
     () => TvShowDetailNotifier(
       getTvShowDetail: locator(),
       getTvShowRecommendations: locator(),
@@ -71,6 +56,9 @@ void init() {
       removeFromWatchlist: locator(),
     ),
   );
+  locator.registerFactory(() => AiringTodayTvShowsBloc(locator()));
+  locator.registerFactory(() => PopularTvShowsBloc(locator()));
+  locator.registerFactory(() => TopRatedTvShowsBloc(locator()));
   locator.registerFactory(() => TvShowSearchNotifier(searchTvShows: locator()));
   locator.registerFactory(
     () => WatchlistTvShowNotifier(getWatchlistTvShows: locator()),

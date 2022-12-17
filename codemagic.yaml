@@ -13,11 +13,11 @@ workflows:
       events:
         - push
       branch_patterns:
-        - pattern: '*'
+        - pattern: "*"
           include: true
           source: true
       tag_patterns:
-        - pattern: '*'
+        - pattern: "*"
           include: true
     scripts:
       - |
@@ -36,7 +36,8 @@ workflows:
         # set up local properties
         echo "flutter.sdk=$HOME/programs/flutter" > "$FCI_BUILD_DIR/android/local.properties"
       - flutter packages pub get
-      - cd movie && flutter test && cd ../tv_show && flutter test
+      # test args
+      - cd modules/movie && flutter test && cd ../tv_show && flutter test
       - flutter build apk --release
       - find . -name "Podfile" -execdir pod install \;
       - flutter build ios --release --no-codesign
@@ -46,7 +47,7 @@ workflows:
       - build/**/outputs/**/mapping.txt
       - build/ios/ipa/*.ipa
       - /tmp/xcodebuild_logs/*.log
-      - '*.snap'
+      - "*.snap"
       - build/windows/**/*.msix
       - flutter_drive.log
     publishing:

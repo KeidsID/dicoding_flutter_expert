@@ -38,11 +38,7 @@ void init() {
   locator.registerFactory(() => MovieSearchBloc(locator()));
   locator.registerFactory(() => PopularMoviesBloc(locator()));
   locator.registerFactory(() => TopRatedMoviesBloc(locator()));
-  locator.registerFactory(
-    () => WatchlistMovieNotifier(
-      getWatchlistMovies: locator(),
-    ),
-  );
+  locator.registerFactory(() => WatchlistMovieBloc(locator()));
 
   locator.registerFactory(
     () => TvShowListNotifier(

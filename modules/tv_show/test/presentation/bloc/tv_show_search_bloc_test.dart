@@ -61,4 +61,12 @@ void main() {
     act: (bloc) => bloc.add(const OnDidChangeDep()),
     expect: () => const <TvShowSearchState>[InitState()],
   );
+
+  blocTest<TvShowSearchBloc, TvShowSearchState>(
+    'emits [InitState] when OnEmptyQuery is added.',
+    build: () => testBloc,
+    act: (bloc) => bloc.add(const OnEmptyQuery()),
+    wait: const Duration(milliseconds: 500),
+    expect: () => const <TvShowSearchState>[InitState()],
+  );
 }

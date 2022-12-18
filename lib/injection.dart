@@ -41,8 +41,8 @@ void init() {
   locator.registerFactory(() => WatchlistMovieBloc(locator()));
 
   locator.registerFactory(
-    () => TvShowListNotifier(
-      getOnAirTvShows: locator(),
+    () => TvShowListBloc(
+      getAiringTodayTvShows: locator(),
       getPopularTvShows: locator(),
       getTopRatedTvShows: locator(),
     ),

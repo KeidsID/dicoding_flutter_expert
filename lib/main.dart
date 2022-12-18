@@ -19,7 +19,7 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var movieProvs = <SingleChildWidget>[
+    final movieProvs = <SingleChildWidget>[
       BlocProvider(
         create: (_) => di.locator<MovieListBloc>(),
       ),
@@ -40,9 +40,9 @@ class MyApp extends StatelessWidget {
       ),
     ];
     
-    var tvShowProvs = <SingleChildWidget>[
-      ChangeNotifierProvider(
-        create: (_) => di.locator<TvShowListNotifier>(),
+    final tvShowProvs = <SingleChildWidget>[
+      BlocProvider(
+        create: (_) => di.locator<TvShowListBloc>(),
       ),
       BlocProvider(
         create: (_) => di.locator<AiringTodayTvShowsBloc>(),

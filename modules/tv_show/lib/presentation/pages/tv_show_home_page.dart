@@ -1,19 +1,17 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-
 import 'package:core/core.dart';
 import 'package:core/pages/about_page.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tv_show/presentation/bloc/tv_show_list/tv_show_list_bloc.dart';
 
+import '../../domain/entities/tv_show.dart';
 import 'airing_today_tv_shows_page.dart';
 import 'popular_tv_shows_page.dart';
 import 'search_tv_show_page.dart';
 import 'top_rated_tv_shows_page.dart';
 import 'tv_show_detail_page.dart';
 import 'watchlist_tv_shows_page.dart';
-
-import '../provider/tv_show_list_notifier.dart.dart';
-import '../../domain/entities/tv_show.dart';
 
 class TvShowHomePage extends StatefulWidget {
   static const routeName = '/tv_show_home';
@@ -29,15 +27,16 @@ class _TvShowHomePageState extends State<TvShowHomePage> {
   void initState() {
     super.initState();
     Future.microtask(() {
-      return Provider.of<TvShowListNotifier>(context, listen: false)
-        ..fetchAiringTodayTvShows()
-        ..fetchPopularTvShows()
-        ..fetchTopRatedTvShows();
+      context.read<TvShowListBloc>().add(const OnFetchAiringToday());
+      context.read<TvShowListBloc>().add(const OnFetchPopular());
+      context.read<TvShowListBloc>().add(const OnFetchTopRated());
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
       drawer: Drawer(
         child: Column(
@@ -110,54 +109,138 @@ class _TvShowHomePageState extends State<TvShowHomePage> {
                   );
                 },
               ),
-              Consumer<TvShowListNotifier>(builder: (context, data, child) {
-                final state = data.airingTodayState;
-                if (state == RequestState.loading) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state == RequestState.loaded) {
-                  return TvShowList(data.airingTodayTvShows);
-                } else {
-                  return const Text('Failed');
-                }
-              }),
+              BlocBuilder<TvShowListBloc, TvShowListState>(
+                builder: (context, state) {
+                  if (state.atState == RequestState.loading) {
+                    return SizedBox(
+                      width: screenSize.width,
+                      height: 200,
+                      child: const Center(child: CircularProgressIndicator()),
+                    );
+                  }
+
+                  if (state.atState != RequestState.loaded) {
+                    if (state.atState != RequestState.error) {
+                      return const SizedBox();
+                    }
+
+                    return SizedBox(
+                      width: screenSize.width,
+                      height: 200,
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(state.msg),
+                            ElevatedButton(
+                              onPressed: () {
+                                context
+                                    .read<TvShowListBloc>()
+                                    .add(const OnFetchAiringToday());
+                              },
+                              child: const Text('Refresh'),
+                            )
+                          ],
+                        ),
+                      ),
+                    );
+                  }
+
+                  return TvShowList(state.atResults);
+                },
+              ),
               _buildSubHeading(
                 title: 'Popular',
                 onTap: () {
                   Navigator.pushNamed(context, PopularTvShowsPage.routeName);
                 },
               ),
-              Consumer<TvShowListNotifier>(builder: (context, data, child) {
-                final state = data.popularState;
-                if (state == RequestState.loading) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state == RequestState.loaded) {
-                  return TvShowList(data.popularTvShows);
-                } else {
-                  return const Text('Failed');
-                }
-              }),
+              BlocBuilder<TvShowListBloc, TvShowListState>(
+                builder: (context, state) {
+                  if (state.popState == RequestState.loading) {
+                    return SizedBox(
+                      width: screenSize.width,
+                      height: 200,
+                      child: const Center(child: CircularProgressIndicator()),
+                    );
+                  }
+
+                  if (state.popState != RequestState.loaded) {
+                    if (state.popState != RequestState.error) {
+                      return const SizedBox();
+                    }
+
+                    return SizedBox(
+                      width: screenSize.width,
+                      height: 200,
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(state.msg),
+                            ElevatedButton(
+                              onPressed: () {
+                                context
+                                    .read<TvShowListBloc>()
+                                    .add(const OnFetchPopular());
+                              },
+                              child: const Text('Refresh'),
+                            )
+                          ],
+                        ),
+                      ),
+                    );
+                  }
+
+                  return TvShowList(state.popResults);
+                },
+              ),
               _buildSubHeading(
                 title: 'Top Rated',
                 onTap: () {
                   Navigator.pushNamed(context, TopRatedTvShowsPage.routeName);
                 },
               ),
-              Consumer<TvShowListNotifier>(builder: (context, data, child) {
-                final state = data.topRatedState;
-                if (state == RequestState.loading) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state == RequestState.loaded) {
-                  return TvShowList(data.topRatedTvShows);
-                } else {
-                  return const Text('Failed');
-                }
-              }),
+              BlocBuilder<TvShowListBloc, TvShowListState>(
+                builder: (context, state) {
+                  if (state.trState == RequestState.loading) {
+                    return SizedBox(
+                      width: screenSize.width,
+                      height: 200,
+                      child: const Center(child: CircularProgressIndicator()),
+                    );
+                  }
+
+                  if (state.trState != RequestState.loaded) {
+                    if (state.trState != RequestState.error) {
+                      return const SizedBox();
+                    }
+
+                    return SizedBox(
+                      width: screenSize.width,
+                      height: 200,
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(state.msg),
+                            ElevatedButton(
+                              onPressed: () {
+                                context
+                                    .read<TvShowListBloc>()
+                                    .add(const OnFetchTopRated());
+                              },
+                              child: const Text('Refresh'),
+                            )
+                          ],
+                        ),
+                      ),
+                    );
+                  }
+
+                  return TvShowList(state.trResults);
+                },
+              ),
             ],
           ),
         ),

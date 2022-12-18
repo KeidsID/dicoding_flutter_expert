@@ -78,4 +78,11 @@ void main() {
     act: (bloc) => bloc.add(const OnDidChangeDep()),
     expect: () => const [InitState()],
   );
+  blocTest<MovieSearchBloc, MovieSearchState>(
+    'emits [StateInit] when OnEmptyQuery is added.',
+    build: () => testBloc,
+    act: (bloc) => bloc.add(const OnEmptyQuery()),
+    wait: const Duration(milliseconds: 500),
+    expect: () => const [InitState()],
+  );
 }

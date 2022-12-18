@@ -89,7 +89,7 @@ class _SearchTvShowPageState extends State<SearchTvShowPage> {
                               if (query == '') {
                                 context
                                     .read<TvShowSearchBloc>()
-                                    .add(const OnDidChangeDep());
+                                    .add(const OnEmptyQuery());
                                 return;
                               }
 

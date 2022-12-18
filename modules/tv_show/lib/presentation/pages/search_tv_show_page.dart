@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:core/core.dart';
-import '../provider/tv_show_search_notifier.dart';
+import 'package:tv_show/presentation/bloc/tv_show_search/tv_show_search_bloc.dart';
 import '../widgets/tv_show_card.dart';
 
 class SearchTvShowPage extends StatefulWidget {
@@ -30,6 +30,12 @@ class _SearchTvShowPageState extends State<SearchTvShowPage> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    context.read<TvShowSearchBloc>().add(const OnDidChangeDep());
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Search')),
@@ -46,27 +52,20 @@ class _SearchTvShowPageState extends State<SearchTvShowPage> {
                 border: OutlineInputBorder(),
               ),
               textInputAction: TextInputAction.search,
-              onSubmitted: (query) => (query != '')
-                  ? Provider.of<TvShowSearchNotifier>(
-                      context,
-                      listen: false,
-                    ).fetchSearchResults(query)
-                  : ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('No Input')),
-                    ),
-            ),
-            const SizedBox(height: 16),
-            Text(
-              'Search Result',
-              style: kHeading6,
-            ),
-            Consumer<TvShowSearchNotifier>(
-              builder: (context, prov, child) {
-                if (prov.state == RequestState.empty) {
-                  return Expanded(child: Container());
+              onChanged: (value) {
+                if (value == '') {
+                  context.read<TvShowSearchBloc>().add(const OnEmptyQuery());
+                  return;
                 }
 
-                if (prov.state == RequestState.loading) {
+                context.read<TvShowSearchBloc>().add(OnQueryChanged(value));
+              },
+            ),
+            const SizedBox(height: 16),
+            Text('Search Result', style: kHeading6),
+            BlocBuilder<TvShowSearchBloc, TvShowSearchState>(
+              builder: (context, state) {
+                if (state is Loading) {
                   return const Expanded(
                     child: Center(
                       child: CircularProgressIndicator(),
@@ -74,7 +73,9 @@ class _SearchTvShowPageState extends State<SearchTvShowPage> {
                   );
                 }
 
-                if (prov.state == RequestState.error) {
+                if (state is! HasData) {
+                  if (state is! Error) return const SizedBox();
+
                   return Expanded(
                     child: Center(
                       child: Column(
@@ -83,15 +84,18 @@ class _SearchTvShowPageState extends State<SearchTvShowPage> {
                           const Text('No Internet Access'),
                           ElevatedButton(
                             onPressed: () {
-                              if (_searchCtrler.text == '') {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text('No Input')),
-                                );
+                              final query = _searchCtrler.text;
 
+                              if (query == '') {
+                                context
+                                    .read<TvShowSearchBloc>()
+                                    .add(const OnDidChangeDep());
                                 return;
                               }
 
-                              prov.fetchSearchResults(_searchCtrler.text);
+                              context
+                                  .read<TvShowSearchBloc>()
+                                  .add(OnQueryChanged(query));
                             },
                             child: const Text('Refresh'),
                           ),
@@ -101,7 +105,7 @@ class _SearchTvShowPageState extends State<SearchTvShowPage> {
                   );
                 }
 
-                final results = prov.results;
+                final results = state.results;
 
                 if (results.isEmpty) {
                   return const Expanded(
@@ -115,7 +119,7 @@ class _SearchTvShowPageState extends State<SearchTvShowPage> {
                   child: ListView.builder(
                     padding: const EdgeInsets.all(8),
                     itemBuilder: (context, index) {
-                      final tvShow = prov.results[index];
+                      final tvShow = state.results[index];
                       return TvShowCard(tvShow);
                     },
                     itemCount: results.length,

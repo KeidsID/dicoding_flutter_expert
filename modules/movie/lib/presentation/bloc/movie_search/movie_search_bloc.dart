@@ -14,6 +14,10 @@ class MovieSearchBloc extends Bloc<MovieSearchEvent, MovieSearchState> {
 
   MovieSearchBloc(this.searchMovie) : super(const InitState()) {
     on<OnDidChangeDep>((_, emit) => emit(const InitState()));
+    on<OnEmptyQuery>(
+      (_, emit) => emit(const InitState()),
+      transformer: blocDebounceTime(const Duration(milliseconds: 500)),
+    );
     on<OnQueryChanged>(
       (event, emit) async {
         final query = event.query;

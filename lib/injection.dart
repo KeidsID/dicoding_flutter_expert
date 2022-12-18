@@ -59,7 +59,7 @@ void init() {
   locator.registerFactory(() => AiringTodayTvShowsBloc(locator()));
   locator.registerFactory(() => PopularTvShowsBloc(locator()));
   locator.registerFactory(() => TopRatedTvShowsBloc(locator()));
-  locator.registerFactory(() => TvShowSearchNotifier(searchTvShows: locator()));
+  locator.registerFactory(() => TvShowSearchBloc(locator()));
   locator.registerFactory(
     () => WatchlistTvShowNotifier(getWatchlistTvShows: locator()),
   );

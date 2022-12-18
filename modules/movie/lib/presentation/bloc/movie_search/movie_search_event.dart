@@ -12,6 +12,10 @@ class OnDidChangeDep extends MovieSearchEvent {
   const OnDidChangeDep();
 }
 
+class OnEmptyQuery extends MovieSearchEvent {
+  const OnEmptyQuery();
+}
+
 class OnQueryChanged extends MovieSearchEvent {
   const OnQueryChanged(this.query);
 

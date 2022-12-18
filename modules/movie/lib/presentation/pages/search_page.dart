@@ -48,7 +48,7 @@ class _SearchPageState extends State<SearchPage> {
               controller: _searchCtrler,
               onChanged: (query) {
                 if (query == '') {
-                  context.read<MovieSearchBloc>().add(const OnDidChangeDep());
+                  context.read<MovieSearchBloc>().add(const OnEmptyQuery());
                   return;
                 }
 

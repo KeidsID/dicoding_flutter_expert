@@ -47,21 +47,19 @@ void init() {
     ),
   );
   locator.registerFactory(
-    () => TvShowDetailNotifier(
+    () => TvShowDetailBloc(
       getTvShowDetail: locator(),
       getTvShowRecommendations: locator(),
-      getWatchlistStatus: locator(),
-      saveToWatchliist: locator(),
-      removeFromWatchlist: locator(),
+      getTvShowWatchlistStatus: locator(),
+      saveTvShowToWatchlist: locator(),
+      removeTvShowFromWatchlist: locator(),
     ),
   );
   locator.registerFactory(() => AiringTodayTvShowsBloc(locator()));
   locator.registerFactory(() => PopularTvShowsBloc(locator()));
   locator.registerFactory(() => TopRatedTvShowsBloc(locator()));
   locator.registerFactory(() => TvShowSearchBloc(locator()));
-  locator.registerFactory(
-    () => WatchlistTvShowNotifier(getWatchlistTvShows: locator()),
-  );
+  locator.registerFactory(() => WatchlistTvShowBloc(locator()));
 
   // use case
   locator.registerLazySingleton(() => GetNowPlayingMovies(locator()));

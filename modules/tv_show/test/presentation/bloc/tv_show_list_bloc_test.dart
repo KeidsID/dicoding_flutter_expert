@@ -25,7 +25,6 @@ void main() {
     );
   });
 
-  final dummyTvShowList = [dummyTvShow];
   const dummyMsg = 'Fail';
 
   group('OnFetchAiringToday event test:', () {

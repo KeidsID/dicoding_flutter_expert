@@ -17,7 +17,6 @@ void main() {
     testBloc = AiringTodayTvShowsBloc(mockUsecase);
   });
 
-  final dummyTvShowList = [dummyTvShow];
   const dummyMsg = 'Fail';
 
   blocTest<AiringTodayTvShowsBloc, AiringTodayTvShowsState>(

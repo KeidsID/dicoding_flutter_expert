@@ -63,14 +63,14 @@ class MyApp extends StatelessWidget {
       BlocProvider(
         create: (_) => di.locator<TopRatedTvShowsBloc>(),
       ),
-      ChangeNotifierProvider(
-        create: (_) => di.locator<TvShowDetailNotifier>(),
+      BlocProvider(
+        create: (_) => di.locator<TvShowDetailBloc>(),
       ),
       BlocProvider(
         create: (_) => di.locator<TvShowSearchBloc>(),
       ),
-      ChangeNotifierProvider(
-        create: (_) => di.locator<WatchlistTvShowNotifier>(),
+      BlocProvider(
+        create: (_) => di.locator<WatchlistTvShowBloc>(),
       ),
     ];
 

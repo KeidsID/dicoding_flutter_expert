@@ -21,6 +21,8 @@ final dummyTvShow = TvShow(
   originalName: 'Pretty Little Liars',
 );
 
+final dummyTvShowList = [dummyTvShow];
+
 const dummyTvShowModel = TvShowModel(
   posterPath: '/vC324sdfcS313vh9QXwijLIHPJp.jpg',
   popularity: 47.432451,

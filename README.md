@@ -36,7 +36,7 @@ Mandatory Tasks:
 
 - [x] Implementing Continuous Integration.
 - [ ] Migrate state management from provider to BLoC.
-- [ ] Implementing SSL Pinning.
+- [x] Implementing SSL Pinning.
 - [ ] Integration with Firebase Analytics & Crashlytics
 
 Optional Tasks:

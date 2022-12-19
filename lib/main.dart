@@ -1,4 +1,7 @@
+import 'package:ditonton/tmdb_client.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:http/io_client.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
@@ -10,55 +13,64 @@ import 'package:tv_show/tv_show.dart';
 
 import 'injection.dart' as di;
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   di.init();
+
+  final client = await tmdbHttpClient;
+
+  client.badCertificateCallback = (cert, host, port) => false;
+  di.locator.registerLazySingleton<IOClient>(() => IOClient(client));
+
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var movieProvs = <SingleChildWidget>[
-      ChangeNotifierProvider(
-        create: (_) => di.locator<MovieListNotifier>(),
+    final movieProvs = <SingleChildWidget>[
+      BlocProvider(
+        create: (_) => di.locator<MovieListBloc>(),
       ),
-      ChangeNotifierProvider(
-        create: (_) => di.locator<MovieDetailNotifier>(),
+      BlocProvider(
+        create: (_) => di.locator<MovieDetailBloc>(),
       ),
-      ChangeNotifierProvider(
-        create: (_) => di.locator<MovieSearchNotifier>(),
+      BlocProvider(
+        create: (_) => di.locator<MovieSearchBloc>(),
       ),
-      ChangeNotifierProvider(
-        create: (_) => di.locator<TopRatedMoviesNotifier>(),
+      BlocProvider(
+        create: (_) => di.locator<TopRatedMoviesBloc>(),
       ),
-      ChangeNotifierProvider(
-        create: (_) => di.locator<PopularMoviesNotifier>(),
+      BlocProvider(
+        create: (_) => di.locator<PopularMoviesBloc>(),
       ),
-      ChangeNotifierProvider(
-        create: (_) => di.locator<WatchlistMovieNotifier>(),
+      BlocProvider(
+        create: (_) => di.locator<WatchlistMovieBloc>(),
       ),
     ];
-    var tvShowProvs = <SingleChildWidget>[
-      ChangeNotifierProvider(
-        create: (_) => di.locator<TvShowListNotifier>(),
+
+    final tvShowProvs = <SingleChildWidget>[
+      BlocProvider(
+        create: (_) => di.locator<TvShowListBloc>(),
       ),
-      ChangeNotifierProvider(
-        create: (_) => di.locator<AiringTodayTvShowsNotifier>(),
+      BlocProvider(
+        create: (_) => di.locator<AiringTodayTvShowsBloc>(),
       ),
-      ChangeNotifierProvider(
-        create: (_) => di.locator<PopularTvShowsNotifier>(),
+      BlocProvider(
+        create: (_) => di.locator<PopularTvShowsBloc>(),
       ),
-      ChangeNotifierProvider(
-        create: (_) => di.locator<TopRatedTvShowsNotifier>(),
+      BlocProvider(
+        create: (_) => di.locator<TopRatedTvShowsBloc>(),
       ),
-      ChangeNotifierProvider(
-        create: (_) => di.locator<TvShowDetailNotifier>(),
+      BlocProvider(
+        create: (_) => di.locator<TvShowDetailBloc>(),
       ),
-      ChangeNotifierProvider(
-        create: (_) => di.locator<TvShowSearchNotifier>(),
+      BlocProvider(
+        create: (_) => di.locator<TvShowSearchBloc>(),
       ),
-      ChangeNotifierProvider(
-        create: (_) => di.locator<WatchlistTvShowNotifier>(),
+      BlocProvider(
+        create: (_) => di.locator<WatchlistTvShowBloc>(),
       ),
     ];
 

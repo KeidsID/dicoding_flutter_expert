@@ -1,12 +1,12 @@
 import 'dart:io';
 
+import 'package:core/core.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
-
-import 'package:core/core.dart';
-import 'package:core/common/utils.dart';
 import 'package:tv_show/data/datasources/tv_show_remote_data_source.dart';
+
+import '../../dummy_data/tv_show_dummy_json_str.dart';
 import '../../dummy_data/tv_show_dummy_obj.dart';
 import '../../helpers/mock_helper.mocks.dart';
 
@@ -20,8 +20,6 @@ void main() {
   });
 
   group('TvShowRemoteDataSource', () {
-    final tvShowListJsonStr = readJson('dummy_data/tv_show_list.json');
-    final tvShowDetailJsonStr = readJson('dummy_data/tv_show_detail.json');
     const tId = 1;
     group('.getAiringTodayTvShows() test:', () {
       test('Return List<TvShowModel> when the response code is 200', () async {
@@ -30,7 +28,7 @@ void main() {
                 .get(Uri.parse('$kApiBaseUrl/tv/airing_today?$kApiKey&page=1')))
             .thenAnswer(
           (_) async => http.Response(
-            tvShowListJsonStr,
+            dummyTvShowListJson,
             200,
             headers: {
               HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
@@ -65,7 +63,7 @@ void main() {
                 .get(Uri.parse('$kApiBaseUrl/tv/popular?$kApiKey&page=1')))
             .thenAnswer(
           (_) async => http.Response(
-            tvShowListJsonStr,
+            dummyTvShowListJson,
             200,
             headers: {
               HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
@@ -101,7 +99,7 @@ void main() {
               .get(Uri.parse('$kApiBaseUrl/tv/top_rated?$kApiKey&page=1')),
         ).thenAnswer(
           (_) async => http.Response(
-            tvShowListJsonStr,
+            dummyTvShowListJson,
             200,
             headers: {
               HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
@@ -137,7 +135,7 @@ void main() {
           Uri.parse('$kApiBaseUrl/tv/$tId?$kApiKey'),
         )).thenAnswer(
           (_) async => http.Response(
-            tvShowDetailJsonStr,
+            dummyTvShowDetailJson,
             200,
             headers: {
               HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
@@ -172,7 +170,7 @@ void main() {
           Uri.parse('$kApiBaseUrl/tv/$tId/recommendations?$kApiKey'),
         )).thenAnswer(
           (_) async => http.Response(
-            tvShowListJsonStr,
+            dummyTvShowListJson,
             200,
             headers: {
               HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
@@ -208,7 +206,7 @@ void main() {
           Uri.parse('$kApiBaseUrl/search/tv?$kApiKey&query=$query'),
         )).thenAnswer(
           (_) async => http.Response(
-            tvShowListJsonStr,
+            dummyTvShowListJson,
             200,
             headers: {
               HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',

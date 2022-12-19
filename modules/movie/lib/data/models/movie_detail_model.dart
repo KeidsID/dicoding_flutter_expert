@@ -64,7 +64,7 @@ class MovieDetailResponse extends Equatable {
         originalTitle: json["original_title"],
         overview: json["overview"],
         popularity: json["popularity"].toDouble(),
-        posterPath: json["poster_path"],
+        posterPath: json["poster_path"].toString(),
         releaseDate: json["release_date"],
         revenue: json["revenue"],
         runtime: json["runtime"],

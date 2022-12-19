@@ -1,3 +1,31 @@
+const dummyTvShowJson = '''
+{
+  "poster_path": "/vC324sdfcS313vh9QXwijLIHPJp.jpg",
+  "popularity": 47.432451,
+  "id": 31917,
+  "backdrop_path": "/rQGBjWNveVeF8f2PGRtS85w9o9r.jpg",
+  "vote_average": 5.04,
+  "overview": "Overview.",
+  "first_air_date": "2010-06-08",
+  "origin_country": ["US"],
+  "genre_ids": [18, 9648],
+  "original_language": "en",
+  "vote_count": 133,
+  "name": "Pretty Little Liars",
+  "original_name": "Pretty Little Liars"
+}
+''';
+
+const dummyTvShowListJson = '''
+{
+  "page": 1,
+  "results": [$dummyTvShowJson],
+  "total_results": 1,
+  "total_pages": 1
+}
+''';
+
+const dummyTvShowDetailJson = '''
 {
   "backdrop_path": "/suopoADq0k8YZr4dQXcU6pToj6s.jpg",
   "created_by": [
@@ -27,7 +55,7 @@
     "episode_number": 6,
     "id": 1551830,
     "name": "The Iron Throne",
-    "overview": "In the aftermath of the devastating attack on King's Landing, Daenerys must face the survivors.",
+    "overview": "Overview.",
     "production_code": "806",
     "season_number": 8,
     "still_path": "/3x8tJon5jXFa1ziAM93hPKNyW7i.jpg",
@@ -49,7 +77,7 @@
   "origin_country": ["US"],
   "original_language": "en",
   "original_name": "Game of Thrones",
-  "overview": "Seven noble families fight for control of the mythical land of Westeros. Friction between the houses leads to full-scale war. All while a very ancient evil awakens in the farthest north. Amidst the war, a neglected military order of misfits, the Night's Watch, is all that stands between the realms of men and icy horrors beyond.",
+  "overview": "Overview.",
   "popularity": 369.594,
   "poster_path": "/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg",
   "production_companies": [
@@ -72,7 +100,7 @@
       "episode_count": 64,
       "id": 3627,
       "name": "Specials",
-      "overview": "",
+      "overview": "Overview.",
       "poster_path": "/kMTcwNRfFKCZ0O2OaBZS0nZ2AIe.jpg",
       "season_number": 0
     }
@@ -90,3 +118,5 @@
   "vote_average": 8.3,
   "vote_count": 11504
 }
+
+''';

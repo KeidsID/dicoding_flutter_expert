@@ -5,8 +5,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
 import 'package:core/core.dart';
-import 'package:core/models/genre_model.dart';
-import 'package:tv_show/data/models/tv_show_detail_model.dart';
 import 'package:tv_show/data/models/tv_show_model.dart';
 import 'package:tv_show/data/repositories/tv_show_repository_impl.dart';
 import 'package:tv_show/domain/entities/tv_show.dart';
@@ -187,34 +185,12 @@ void main() {
       );
     });
     group('.getTvShowDetail() test:', () {
-      const detailResponse = TvShowDetailModel(
-        backdropPath: '/suopoADq0k8YZr4dQXcU6pToj6s.jpg',
-        genres: <GenreModel>[
-          GenreModel(id: 10765, name: 'Sci-Fi & Fantasy'),
-          GenreModel(id: 18, name: 'Drama'),
-          GenreModel(id: 10759, name: 'Action & Adventure'),
-          GenreModel(id: 9648, name: 'Mystery'),
-        ],
-        homepage: '',
-        id: 1399,
-        name: 'Game of Thrones',
-        numberOfEpisodes: 73,
-        numberOfSeasons: 8,
-        originalName: 'Game of Thrones',
-        overview:
-            "Seven noble families fight for control of the mythical land of Westeros. Friction between the houses leads to full-scale war. All while a very ancient evil awakens in the farthest north. Amidst the war, a neglected military order of misfits, the Night's Watch, is all that stands between the realms of men and icy horrors beyond.",
-        popularity: 369.594,
-        posterPath: '/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg',
-        voteAverage: 8.3,
-        voteCount: 11504,
-      );
-
       test(
         'Return TvShowDetail() when remote data source call is successful',
         () async {
           // arrange
           when(mockRemoteDS.getTvShowDetail(tvShowId))
-              .thenAnswer((_) async => detailResponse);
+              .thenAnswer((_) async => dummyTvShowDetailModel);
 
           // act
           final result = await repo.getTvShowDetail(tvShowId);

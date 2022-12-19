@@ -1,8 +1,9 @@
 import 'dart:convert';
-import 'package:flutter_test/flutter_test.dart';
 
-import 'package:core/common/utils.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:tv_show/data/models/tv_show_model.dart';
+
+import '../../dummy_data/tv_show_dummy_json_str.dart';
 import '../../dummy_data/tv_show_dummy_obj.dart';
 
 void main() {
@@ -10,7 +11,7 @@ void main() {
     test('Return TvShowModel from JSON data', () {
       // arrange
       final Map<String, dynamic> jsonMap = json.decode(
-        readJson('dummy_data/tv_show.json'),
+        dummyTvShowJson,
       );
 
       // act

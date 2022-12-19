@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "281207652582",
+    "project_id": "flutter-dicoding-expert",
+    "storage_bucket": "flutter-dicoding-expert.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:281207652582:android:432586d255fe24ee403b27",
+        "android_client_info": {
+          "package_name": "com.dicoding.ditonton"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "281207652582-2h1f0t503cb74k0i9h3rvvq10c3mec8v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJkFswwnjzozye7hpRqt07TkiSMRt8DLg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "281207652582-2h1f0t503cb74k0i9h3rvvq10c3mec8v.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "281207652582-sn1pdpfmivnuebjnr3ic7cm65j3dr5sq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.dicoding.ditonton"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

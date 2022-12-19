@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
 import 'package:core/pages/about_page.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tv_show/presentation/bloc/tv_show_list/tv_show_list_bloc.dart';
@@ -52,6 +53,8 @@ class _TvShowHomePageState extends State<TvShowHomePage> {
               leading: const Icon(Icons.movie),
               title: const Text('Movies'),
               onTap: () {
+                // FirebaseCrashlytics.instance.crash();
+
                 // popUntil() did'nt work, so I did this
                 Navigator.pop(context);
                 Navigator.pop(context);

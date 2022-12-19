@@ -1,17 +1,18 @@
-import 'package:ditonton/tmdb_client.dart';
+import 'package:core/common/utils.dart';
+import 'package:core/core.dart';
+import 'package:core/pages/about_page.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/io_client.dart';
+import 'package:movie/movie.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
-
-import 'package:core/core.dart';
-import 'package:core/common/utils.dart';
-import 'package:core/pages/about_page.dart';
-import 'package:movie/movie.dart';
 import 'package:tv_show/tv_show.dart';
 
+import 'firebase_options.dart';
 import 'injection.dart' as di;
+import 'tmdb_client.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,6 +23,10 @@ void main() async {
 
   client.badCertificateCallback = (cert, host, port) => false;
   di.locator.registerLazySingleton<IOClient>(() => IOClient(client));
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   runApp(MyApp());
 }

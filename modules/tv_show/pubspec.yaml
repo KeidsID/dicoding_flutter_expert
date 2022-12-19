@@ -24,6 +24,7 @@ dependencies:
   sqflite: ^2.2.2
   equatable: ^2.0.5
   flutter_bloc: ^8.1.1
+  firebase_crashlytics: ^3.0.7
 
 dev_dependencies:
   flutter_test:

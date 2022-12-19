@@ -1,5 +1,7 @@
+import 'package:ditonton/tmdb_client.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:http/io_client.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
@@ -11,8 +13,16 @@ import 'package:tv_show/tv_show.dart';
 
 import 'injection.dart' as di;
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   di.init();
+
+  final client = await tmdbHttpClient;
+
+  client.badCertificateCallback = (cert, host, port) => false;
+  di.locator.registerLazySingleton<IOClient>(() => IOClient(client));
+
   runApp(MyApp());
 }
 
@@ -39,7 +49,7 @@ class MyApp extends StatelessWidget {
         create: (_) => di.locator<WatchlistMovieBloc>(),
       ),
     ];
-    
+
     final tvShowProvs = <SingleChildWidget>[
       BlocProvider(
         create: (_) => di.locator<TvShowListBloc>(),

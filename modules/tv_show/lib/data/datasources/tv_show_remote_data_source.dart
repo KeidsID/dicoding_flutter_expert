@@ -1,9 +1,8 @@
 import 'dart:convert';
 
-import 'package:http/http.dart' as http;
-
 import 'package:core/common/constants.dart';
 import 'package:core/common/exception.dart';
+import 'package:http/io_client.dart';
 import '../models/tv_show_model.dart';
 import '../models/tv_show_response.dart';
 import '../models/tv_show_detail_model.dart';
@@ -18,13 +17,13 @@ abstract class TvShowRemoteDataSource {
 }
 
 class TvShowRemoteDataSourceImpl implements TvShowRemoteDataSource {
-  TvShowRemoteDataSourceImpl({required this.client});
+  final IOClient ioClient;
 
-  final http.Client client;
+  TvShowRemoteDataSourceImpl({required this.ioClient});
 
   @override
   Future<List<TvShowModel>> getAiringTodayTvShows({int page = 1}) async {
-    final response = await client.get(
+    final response = await ioClient.get(
       Uri.parse('$kApiBaseUrl/tv/airing_today?$kApiKey&page=$page'),
     );
 
@@ -37,7 +36,7 @@ class TvShowRemoteDataSourceImpl implements TvShowRemoteDataSource {
 
   @override
   Future<List<TvShowModel>> getPopularTvShows({int page = 1}) async {
-    final response = await client.get(
+    final response = await ioClient.get(
       Uri.parse('$kApiBaseUrl/tv/popular?$kApiKey&page=$page'),
     );
 
@@ -50,7 +49,7 @@ class TvShowRemoteDataSourceImpl implements TvShowRemoteDataSource {
 
   @override
   Future<List<TvShowModel>> getTopRatedTvShows({int page = 1}) async {
-    final response = await client.get(
+    final response = await ioClient.get(
       Uri.parse('$kApiBaseUrl/tv/top_rated?$kApiKey&page=$page'),
     );
 
@@ -63,7 +62,7 @@ class TvShowRemoteDataSourceImpl implements TvShowRemoteDataSource {
 
   @override
   Future<TvShowDetailModel> getTvShowDetail(int id) async {
-    final response = await client.get(
+    final response = await ioClient.get(
       Uri.parse('$kApiBaseUrl/tv/$id?$kApiKey'),
     );
 
@@ -76,7 +75,7 @@ class TvShowRemoteDataSourceImpl implements TvShowRemoteDataSource {
 
   @override
   Future<List<TvShowModel>> getTvShowRecommendations(int id) async {
-    final response = await client.get(
+    final response = await ioClient.get(
       Uri.parse('$kApiBaseUrl/tv/$id/recommendations?$kApiKey'),
     );
 
@@ -89,7 +88,7 @@ class TvShowRemoteDataSourceImpl implements TvShowRemoteDataSource {
 
   @override
   Future<List<TvShowModel>> searchTvShows(String query) async {
-    final response = await client.get(
+    final response = await ioClient.get(
       Uri.parse('$kApiBaseUrl/search/tv?$kApiKey&query=$query'),
     );
 

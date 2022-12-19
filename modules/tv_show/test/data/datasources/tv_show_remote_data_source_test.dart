@@ -11,12 +11,12 @@ import '../../dummy_data/tv_show_dummy_obj.dart';
 import '../../helpers/mock_helper.mocks.dart';
 
 void main() {
-  late MockHttpClient mockClient;
+  late MockIoClient mockClient;
   late TvShowRemoteDataSourceImpl dataSource;
 
   setUp(() {
-    mockClient = MockHttpClient();
-    dataSource = TvShowRemoteDataSourceImpl(client: mockClient);
+    mockClient = MockIoClient();
+    dataSource = TvShowRemoteDataSourceImpl(ioClient: mockClient);
   });
 
   group('TvShowRemoteDataSource', () {

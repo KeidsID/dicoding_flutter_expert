@@ -15,11 +15,11 @@ void main() {
   const baseUrl = 'https://api.themoviedb.org/3';
 
   late MovieRemoteDataSourceImpl dataSource;
-  late MockHttpClient mockHttpClient;
+  late MockIoClient mockHttpClient;
 
   setUp(() {
-    mockHttpClient = MockHttpClient();
-    dataSource = MovieRemoteDataSourceImpl(client: mockHttpClient);
+    mockHttpClient = MockIoClient();
+    dataSource = MovieRemoteDataSourceImpl(ioClient: mockHttpClient);
   });
 
   group('get Now Playing Movies', () {

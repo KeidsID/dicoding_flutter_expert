@@ -29,6 +29,8 @@ class MovieRepositoryImpl implements MovieRepository {
       return const Left(ServerFailure(''));
     } on SocketException {
       return const Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException {
+      return const Left(SSLFailure('Certificate Verify Failed. Refresh button won\'t work'));
     }
   }
 
@@ -41,6 +43,8 @@ class MovieRepositoryImpl implements MovieRepository {
       return const Left(ServerFailure(''));
     } on SocketException {
       return const Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException {
+      return const Left(SSLFailure('Certificate Verify Failed. Refresh button won\'t work'));
     }
   }
 
@@ -53,6 +57,8 @@ class MovieRepositoryImpl implements MovieRepository {
       return const Left(ServerFailure(''));
     } on SocketException {
       return const Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException {
+      return const Left(SSLFailure('Certificate Verify Failed. Refresh button won\'t work'));
     }
   }
 
@@ -65,6 +71,8 @@ class MovieRepositoryImpl implements MovieRepository {
       return const Left(ServerFailure(''));
     } on SocketException {
       return const Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException {
+      return const Left(SSLFailure('Certificate Verify Failed. Refresh button won\'t work'));
     }
   }
 
@@ -77,6 +85,8 @@ class MovieRepositoryImpl implements MovieRepository {
       return const Left(ServerFailure(''));
     } on SocketException {
       return const Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException {
+      return const Left(SSLFailure('Certificate Verify Failed. Refresh button won\'t work'));
     }
   }
 
@@ -89,6 +99,8 @@ class MovieRepositoryImpl implements MovieRepository {
       return const Left(ServerFailure(''));
     } on SocketException {
       return const Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException {
+      return const Left(SSLFailure('Certificate Verify Failed. Refresh button won\'t work'));
     }
   }
 

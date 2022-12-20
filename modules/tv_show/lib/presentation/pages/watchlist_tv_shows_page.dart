@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:core/core.dart';
 import 'package:core/common/utils.dart';
 import '../bloc/watchlist_tv_show/watchlist_tv_show_bloc.dart';
 import '../widgets/tv_show_card.dart';
